@@ -2,26 +2,50 @@
     "events": [
         {
             "id": 1,
-            "title": "Bar Night – Sales Saturday",
-            "date": "January 10, 2026",
-            "time": "7:00 PM",
-            "location": "McCabe's Irish Pub",
-            "description": "Join us for an evening of networking and sales insights at the bar."
+            "title": "Guest Speaker Event – Aaron Anders",
+            "date": "January 24, 2026",
+            "time": "4:00 PM",
+            "location": "Sommerville House 2317",
+            "description": "Meet the President of College Pro Canada and gain real, practical insight on sales and door-to-door selling, along with his valuable personal experience and expertise." 
         },
         {
             "id": 2,
-            "title": "WSC Sales Competition",
-            "date": "April 1, 2026",
-            "time": "3:00 PM",
-            "location": "Morrissette Institute for Entrepreneurship",
-            "description": "Compete in a sales case competition hosted by Western University's very own sales club."
+            "title": "Guest Speaker Event – Luc Villenvue",
+            "date": "November 14, 2025",
+            "time": "1:00 PM",
+            "location": "Sommerville House 2317",
+            "description": "Gain valuable sales insights from Luc Villenvue, whose scaled businesses to $100M+ revenues and built high-performance sales oganizations across North America and Europe." 
+        },
+        {
+            "id": 2,
+            "title": "Bar Night – Halloween Social",
+            "date": "October 29, 2025",
+            "time": "9:30 PM",
+            "location": "McCabe's Irish Pub",
+            "description": "Join us for a spooky sales social!" 
         },
         {
             "id": 3,
+            "title": "Bar Night – Sales Saturday",
+            "date": "October 18, 2025",
+            "time": "8:30 PM",
+            "location": "McCabe's Irish Pub",
+            "description": "Join us for an evening of networking and sales insights at the bar!" 
+        },
+        {
+            "id": 4,
+            "title": "Annual General Meeting (AGM)",
+            "date": "October 7, 2025",
+            "time": "4:30 PM",
+            "location": "University Community Centre (UCC), Room 56",
+            "description": "Join us for our first Annual General Meeting (AGM) to meet the team, discuss our goals, and showcase our upcoming events this year!"
+        },
+        {
+            "id": 5,
             "title": "Guest Speaker Event – Kurt Connors",
-            "date": "April 15, 2026",
+            "date": "April 4, 2025",
             "time": "5:00 PM",
-            "location": "Sommerville House",
+            "location": "Sommerville House 2317",
             "description": "Join us for a talk with Professor Kurt Connors, an expert in consumer behaviour."
         }
     ]
