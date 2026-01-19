@@ -29,7 +29,7 @@
     height: 120px;
     object-fit: contain;
     animation: pulseLogo 2s infinite ease-in-out;
-    filter: invert(1) drop-shadow(0 0 8px rgba(255, 217, 90, 0.5));
+    filter: invert(1) drop-shadow(0 0 8px var(--wsc-gold));
 }
 
 .loading-bar-container {
