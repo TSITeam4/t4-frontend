@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LazyImage from "./LazyImage";
 
 function Sponsor({ logoFileName, name, description, link }) {
     const [isHovered, setIsHovered] = React.useState(false);
@@ -16,7 +17,7 @@ function Sponsor({ logoFileName, name, description, link }) {
         margin: '1.25rem auto',
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         backdropFilter: 'blur(10px)',
-        boxShadow: isHovered 
+        boxShadow: isHovered
             ? '0 20px 40px rgba(var(--wsc-gold-rgb), 0.3), 0 0 60px rgba(79, 38, 131, 0.3)'
             : '0 4px 6px rgba(0, 0, 0, 0.1)',
         transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
@@ -24,7 +25,7 @@ function Sponsor({ logoFileName, name, description, link }) {
     };
 
     const logoBlockStyles = {
-        background: isHovered 
+        background: isHovered
             ? 'linear-gradient(135deg, var(--wsc-dark) 0%, rgba(var(--wsc-gold-rgb), 0.02) 100%), cursor-pointer'
             : 'rgba(var(--wsc-purple-rgb), 0.05)',
         padding: '2rem',
@@ -133,7 +134,7 @@ function Sponsor({ logoFileName, name, description, link }) {
     const finalDescriptionStyles = window.innerWidth >= 768 ? mediaQueryStyles.descriptionStyles : descriptionStyles;
 
     return (
-        <div 
+        <div
             style={finalCardStyles}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -142,9 +143,9 @@ function Sponsor({ logoFileName, name, description, link }) {
             <div style={finalLogoBlockStyles}>
                 <div style={glowStyles}></div>
                 <Link to={link} target="_blank" rel="noopener noreferrer" style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <img 
+                    <LazyImage
                         src={new URL(`../../data/sponsor-logos/${logoFileName}`, import.meta.url).href}
-                        alt={name} 
+                        alt={name}
                         style={logoStyles}
                     />
                 </Link>

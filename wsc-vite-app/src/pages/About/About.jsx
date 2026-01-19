@@ -2,6 +2,7 @@ import React from "react";
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import PageTitle from "../../components/PageTitle";
+import LazyImage from '../../components/LazyImage';
 import './About.css';
 
 function About() {
@@ -15,7 +16,7 @@ function About() {
       <div className="about-container">
         <section className="about-section">
           <div className="content-flex">
-            <img
+            <LazyImage
               src="abt1.avif"
               alt="Our Mission"
               className="content-image"
@@ -45,7 +46,7 @@ function About() {
                 who can adapt to a rapidly evolving marketplace.
               </p>
             </div>
-            <img
+            <LazyImage
               src="abt2.avif"
               alt="Our Vision"
               className="content-image"

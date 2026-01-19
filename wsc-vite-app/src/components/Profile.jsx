@@ -1,12 +1,13 @@
 import React from "react";
+import LazyImage from "./LazyImage";
 
 function Profile({ headshotFileName, name, title }) {
 
   const headshotImage = new URL(`../../data/headshots/${headshotFileName}`, import.meta.url).href;
-  
+
   return (
     <div className="flex flex-col items-center justify-center mx-auto">
-      <img
+      <LazyImage
         src={headshotImage}
         alt={name}
         className="w-56 h-56 object-cover border-2 border-gray-300 hover:shadow-lg hover:shadow-[var(--wsc-light)] hover:scale-105 duration-300"
