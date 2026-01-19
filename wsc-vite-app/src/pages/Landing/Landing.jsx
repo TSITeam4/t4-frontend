@@ -6,6 +6,7 @@ import './Landing.css';
 import sponsorData from '../../../data/SponsorData.json';
 import Event from '../../components/Event';
 import { Link } from "react-router-dom";
+import aboutData from '../../../data/aboutData.json';
 
 function Landing({ events, loading, error }) {
 
@@ -17,13 +18,13 @@ function Landing({ events, loading, error }) {
         const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
         emailjs.sendForm('service_qwpe0fl', 'template_lt8anmn', formRef.current, publicKey)
-        .then((result) => {
-            alert("Message sent successfully!");
-            e.target.reset();
-        }, (error) => {
-            alert("Failed to send message. Please try again.");
-            console.error(error);
-        });
+            .then((result) => {
+                alert("Message sent successfully!");
+                e.target.reset();
+            }, (error) => {
+                alert("Failed to send message. Please try again.");
+                console.error(error);
+            });
     };
 
     const [scrollY, setScrollY] = React.useState(0);
@@ -41,7 +42,7 @@ function Landing({ events, loading, error }) {
                 {/** ========== HERO ================================================================================ */}
                 <div className="hero-section">
                     <div className="contents relative z-10">
-                        <Nav/>
+                        <Nav />
                     </div>
 
                     <div
@@ -59,58 +60,58 @@ function Landing({ events, loading, error }) {
 
                 {/* ========== ABOUT US ================================================================================ */}
                 <section id="about">
-                <div className="container-custom">
-                    <div className="about-header">
-                        <p className="section-title">About Our Club</p>
-                        <div className="divider"></div>
-                    </div>
+                    <div className="container-custom">
+                        <div className="about-header">
+                            <p className="section-title">About Our Club</p>
+                            <div className="divider"></div>
+                        </div>
 
-                    <div className="about-grid">
-                    <div className="about-text-section">
-                        <h2 className="about-subtitle">Who We Are</h2>
-                        <p className="about-description">
-                            Western Sales Club is at the frontier of sales education at Western University.
-                            We're not just teaching sales, we're building effective communicators and personable leaders –
-                            giving you the confidence to succeed in any field.
-                        </p>
-                        <h3 className="about-subtitle">Our Mission</h3>
-                        <p className="about-description">
-                            Western Sales Club envisions a future where sales education and representation 
-                            is fully integrated into post-secondary learning, equipping students with practical 
-                            communication skills, confidence, industry connections, and a supportive community to 
-                            make a positive impact on personal/social lives and drive career success in any field.
-                        </p>
-                        
-                        <div className="about-button-wrapper">
-                            <Link to="/executive-team" style={{ all: 'unset' }}>
-                                <button>Meet our Team</button>
-                            </Link>
-                        </div>
-                        
+                        <div className="about-grid">
+                            <div className="about-text-section">
+                                <h2 className="about-subtitle">Who We Are</h2>
+                                <p className="about-description">
+                                    Western Sales Club is at the frontier of sales education at Western University.
+                                    We're not just teaching sales, we're building effective communicators and personable leaders –
+                                    giving you the confidence to succeed in any field.
+                                </p>
+                                <h3 className="about-subtitle">Our Mission</h3>
+                                <p className="about-description">
+                                    Western Sales Club envisions a future where sales education and representation
+                                    is fully integrated into post-secondary learning, equipping students with practical
+                                    communication skills, confidence, industry connections, and a supportive community to
+                                    make a positive impact on personal/social lives and drive career success in any field.
+                                </p>
 
+                                <div className="about-button-wrapper">
+                                    <Link to="/executive-team" style={{ all: 'unset' }}>
+                                        <button>Meet our Team</button>
+                                    </Link>
+                                </div>
+
+
+                            </div>
+                            <div className="about-stats-card">
+                                <div className="stats-grid">
+                                    <div className="stat-item">
+                                        <h4 className="stat-number">{aboutData.members}+</h4>
+                                        <p className="stat-label">Active Members</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <h4 className="stat-number">{aboutData.execs}</h4>
+                                        <p className="stat-label">Committed Executives</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <h4 className="stat-number">{aboutData.events}+</h4>
+                                        <p className="stat-label">Annual Events</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <h4 className="stat-number">{aboutData.partners}+</h4>
+                                        <p className="stat-label">Dedicated Partners</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="about-stats-card">
-                        <div className="stats-grid">
-                        <div className="stat-item">
-                            <h4 className="stat-number">50+</h4>
-                            <p className="stat-label">Active Members</p>
-                        </div>
-                        <div className="stat-item">
-                            <h4 className="stat-number">10</h4>
-                            <p className="stat-label">Committed Executives</p>
-                        </div>
-                        <div className="stat-item">
-                            <h4 className="stat-number">8+</h4>
-                            <p className="stat-label">Annual Events</p>
-                        </div>
-                        <div className="stat-item">
-                            <h4 className="stat-number">3+</h4>
-                            <p className="stat-label">Dedicated Partners</p>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
                 </section>
 
                 {/* ========== LANDSCAPE IMAGE ================================================================================*/}
@@ -127,244 +128,244 @@ function Landing({ events, loading, error }) {
 
                 {/* ========== WHAT WE DO ================================================================================ */}
                 <div id="what-we-do" className="what-we-do-section">
-                <h2 className="section-title">What We Do</h2>
-                <div className="divider"></div>
-                
-                <div className="features">
-                    <div className="feature-card">
-                        <div className="feature-card-inner">
-                            <div className="feature-icon-wrapper">
-                                <div className="feature-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div className="feature-text">
-                                <h3 className="feature-title">Guest Speaker Panels</h3>
-                                <p className="feature-description">
-                                    Gain direct exposure to accomplished professionals across a variety of industries through our engaging speaker panels. 
-                                    Learn about their journeys, challenges, and the sales and communication skills that helped them succeed—offering you both 
-                                    inspiration and actionable advice.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 className="section-title">What We Do</h2>
+                    <div className="divider"></div>
 
-                    <div className="feature-card">
-                        <div className="feature-card-inner">
-                            <div className="feature-icon-wrapper">
-                                <div className="feature-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-                                    </svg>
+                    <div className="features">
+                        <div className="feature-card">
+                            <div className="feature-card-inner">
+                                <div className="feature-icon-wrapper">
+                                    <div className="feature-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="feature-text">
+                                    <h3 className="feature-title">Guest Speaker Panels</h3>
+                                    <p className="feature-description">
+                                        Gain direct exposure to accomplished professionals across a variety of industries through our engaging speaker panels.
+                                        Learn about their journeys, challenges, and the sales and communication skills that helped them succeed—offering you both
+                                        inspiration and actionable advice.
+                                    </p>
                                 </div>
                             </div>
-                            <div className="feature-text">
-                                <h3 className="feature-title">Sales Competitions</h3>
-                                <p className="feature-description">
-                                    Our sales competitions are a fun, energizing way to learn by doing. 
-                                    Whether you're brand new or experienced, you'll enjoy role-playing real-world scenarios, 
-                                    refining your pitch, and receiving feedback from judges—all while building confidence and making new connections.
-                                </p>
-                            </div>
                         </div>
-                    </div>
 
-                    <div className="feature-card">
-                        <div className="feature-card-inner">
-                            <div className="feature-icon-wrapper">
-                                <div className="feature-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                                    </svg>
+                        <div className="feature-card">
+                            <div className="feature-card-inner">
+                                <div className="feature-icon-wrapper">
+                                    <div className="feature-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="feature-text">
+                                    <h3 className="feature-title">Sales Competitions</h3>
+                                    <p className="feature-description">
+                                        Our sales competitions are a fun, energizing way to learn by doing.
+                                        Whether you're brand new or experienced, you'll enjoy role-playing real-world scenarios,
+                                        refining your pitch, and receiving feedback from judges—all while building confidence and making new connections.
+                                    </p>
                                 </div>
                             </div>
-                            <div className="feature-text">
-                                <h3 className="feature-title">Strategy Enhancement</h3>
-                                <p className="feature-description">
-                                    Western Sales Club partners with actual organizations and businesses to offer students the opportunity 
-                                    to apply sales strategies in meaningful, real-world projects. These experiences help develop your 
-                                    problem-solving, communication, and strategic thinking in a professional context.
-                                </p>
+                        </div>
+
+                        <div className="feature-card">
+                            <div className="feature-card-inner">
+                                <div className="feature-icon-wrapper">
+                                    <div className="feature-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="feature-text">
+                                    <h3 className="feature-title">Strategy Enhancement</h3>
+                                    <p className="feature-description">
+                                        Western Sales Club partners with actual organizations and businesses to offer students the opportunity
+                                        to apply sales strategies in meaningful, real-world projects. These experiences help develop your
+                                        problem-solving, communication, and strategic thinking in a professional context.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
 
                 {/* ========== SPONSORS CAROUSEL ================================================================================ */}
                 <h2 className="section-title">Our Esteemed Sponsors</h2>
                 <div className="divider"></div>
                 <div className="sponsors-carousel">
-                <div className="marquee-track">
+                    <div className="marquee-track">
 
-                    {[...Array(5)].map((_, index) => (
-                        <div
-                        key={index}
-                        className="marquee-item"
-                        >
-                            <div className="marquee-logos">
-                            {sponsorData.sponsors.map(sponsor => (
-                                <div key={sponsor.id} className="sponsor-logo">
-                                    <img 
-                                        src={new URL(`../../../data/sponsor-logos/${sponsor.logoFileName}`, import.meta.url).href} 
-                                        alt={sponsor.name} 
-                                    />
+                        {[...Array(5)].map((_, index) => (
+                            <div
+                                key={index}
+                                className="marquee-item"
+                            >
+                                <div className="marquee-logos">
+                                    {sponsorData.sponsors.map(sponsor => (
+                                        <div key={sponsor.id} className="sponsor-logo">
+                                            <img
+                                                src={new URL(`../../../data/sponsor-logos/${sponsor.logoFileName}`, import.meta.url).href}
+                                                alt={sponsor.name}
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="sponsors-spacer"></div>
 
                 {/* ========== EVENTS PREVIEW ================================================================================ */}
                 <section id="events" className="events-section">
-                <div className="container-custom">
-                    <div className="events-header">
-                    <h2 className="section-title">Our Events</h2>
-                    <div className="divider"></div>
-                    <p>
-                        Join us for our upcoming events designed to help you develop your skills and expand your network.
-                    </p>
-                    </div>
+                    <div className="container-custom">
+                        <div className="events-header">
+                            <h2 className="section-title">Our Events</h2>
+                            <div className="divider"></div>
+                            <p>
+                                Join us for our upcoming events designed to help you develop your skills and expand your network.
+                            </p>
+                        </div>
 
-                    <div className="events-content">
-                        <div className="events-button-wrapper">
-                        <Link to="/events" style={{ all: 'unset' }}>
-                            <button> View All Events </button>
-                        </Link>
-                        </div>
-                    
-                        <div className="events-list">
-                            {previewEvents.map((event) => {
-                                return <Event key={event.id} event={event} />;
-                            })}
+                        <div className="events-content">
+                            <div className="events-button-wrapper">
+                                <Link to="/events" style={{ all: 'unset' }}>
+                                    <button> View All Events </button>
+                                </Link>
+                            </div>
+
+                            <div className="events-list">
+                                {previewEvents.map((event) => {
+                                    return <Event key={event.id} event={event} />;
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
                 </section>
 
                 {/* ========== CONTACT US ================================================================================ */}
                 <section id="contact" className="contact-section">
-                <div className="container-custom">
-                    <div className="contact-header">
-                    <h2 className="section-title">Get In Touch</h2>
-                    <div className="divider"></div>
-                    <p className="contact-description">
-                        Interested in joining our club or partnering with us? We'd love to hear from you!
-                    </p>
-                    </div>
-
-                    <div className="contact-card">
-                    <div className="contact-grid">
-                        <div className="contact-info">
-                        <h3 className="contact-info-title">Connect With Us</h3>
-                        <div className="contact-links">
-                            <div className="contact-link-item">
-                            <a
-                                href="https://www.linkedin.com/company/western-sales-club/"
-                                aria-label="LinkedIn"
-                            >
-                                <img
-                                src="/Linkedin.svg"
-                                alt="LinkedIn"
-                                />
-                            </a>
-                            <span className="contact-link-text">Western Sales Club</span>
-                            </div>
-
-                            <div className="contact-link-item">
-                            <a
-                                href="https://www.instagram.com/westernsalesclub/"
-                                aria-label="Instagram"
-                            >
-                                <img
-                                src="/Instagram.svg"
-                                alt="Instagram"
-                                />
-                            </a>
-                            <span className="contact-link-text">@westernsalesclub</span>
-                            </div>
-                        </div>
+                    <div className="container-custom">
+                        <div className="contact-header">
+                            <h2 className="section-title">Get In Touch</h2>
+                            <div className="divider"></div>
+                            <p className="contact-description">
+                                Interested in joining our club or partnering with us? We'd love to hear from you!
+                            </p>
                         </div>
 
-                        <div className="contact-form-wrapper">
-                        <h3 className="contact-form-title">Send Us a Message</h3>
-                        <form className="contact-form" onSubmit={sendEmail} ref={formRef}>
-                            <div className="form-group">
-                            <label htmlFor="name">
-                                Your Name*
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="John Doe"
-                                required
-                            />
+                        <div className="contact-card">
+                            <div className="contact-grid">
+                                <div className="contact-info">
+                                    <h3 className="contact-info-title">Connect With Us</h3>
+                                    <div className="contact-links">
+                                        <div className="contact-link-item">
+                                            <a
+                                                href="https://www.linkedin.com/company/western-sales-club/"
+                                                aria-label="LinkedIn"
+                                            >
+                                                <img
+                                                    src="/Linkedin.svg"
+                                                    alt="LinkedIn"
+                                                />
+                                            </a>
+                                            <span className="contact-link-text">Western Sales Club</span>
+                                        </div>
+
+                                        <div className="contact-link-item">
+                                            <a
+                                                href="https://www.instagram.com/westernsalesclub/"
+                                                aria-label="Instagram"
+                                            >
+                                                <img
+                                                    src="/Instagram.svg"
+                                                    alt="Instagram"
+                                                />
+                                            </a>
+                                            <span className="contact-link-text">@westernsalesclub</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="contact-form-wrapper">
+                                    <h3 className="contact-form-title">Send Us a Message</h3>
+                                    <form className="contact-form" onSubmit={sendEmail} ref={formRef}>
+                                        <div className="form-group">
+                                            <label htmlFor="name">
+                                                Your Name*
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="name"
+                                                name="name"
+                                                placeholder="John Doe"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="email">
+                                                Your Email*
+                                            </label>
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                placeholder="johndoe@example.com"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="organization_type">
+                                                Organization Type (optional)
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="organization_type"
+                                                name="organization_type"
+                                                placeholder="Who are you representing?"
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="subject">
+                                                Subject*
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="subject"
+                                                name="subject"
+                                                placeholder="How can we help you?"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="message">
+                                                Your Message*
+                                            </label>
+                                            <textarea
+                                                id="message"
+                                                name="message"
+                                                rows={4}
+                                                placeholder="Write your message here..."
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="contact-submit-button"
+                                        >
+                                            Send Message
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                            <div className="form-group">
-                            <label htmlFor="email">
-                                Your Email*
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="johndoe@example.com"
-                                required
-                            />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="organization_type">
-                                Organization Type (optional)
-                            </label>
-                            <input
-                                type="text"
-                                id="organization_type"
-                                name="organization_type"
-                                placeholder="Who are you representing?"
-                            />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="subject">
-                                Subject*
-                            </label>
-                            <input
-                                type="text"
-                                id="subject"
-                                name="subject"
-                                placeholder="How can we help you?"
-                                required
-                            />
-                            </div>
-                            <div className="form-group">
-                            <label htmlFor="message">
-                                Your Message*
-                            </label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows={4}
-                                placeholder="Write your message here..."
-                                required
-                            ></textarea>
-                            </div>
-                            <button
-                            type="submit"
-                            className="contact-submit-button"
-                            >
-                            Send Message
-                            </button>
-                        </form>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </section>
 
                 {/* ========== JOIN ================================================================================ */}
