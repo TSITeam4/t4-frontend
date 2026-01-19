@@ -15,7 +15,7 @@ import "./App.css"
 
 const ScrollToTop = () => {
   const location = useLocation(); // Import useLocation from react-router-dom
-  
+
   React.useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -27,10 +27,13 @@ const ScrollToTop = () => {
   return null;
 }
 
+import Preloader from "./components/Preloader"
+
 function App() {
 
   const [events, setEvents] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [appReady, setAppReady] = React.useState(false);
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
@@ -52,26 +55,29 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-grow">
-        <Router>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={
-              <Landing events={events} />
-            } />
-            <Route path="/about" element={<About />} />
-            <Route path="/executive-team" element={<ExecutiveTeam />} />
-            <Route path="/events" element={
-              <Events events={events} />
-            } />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/sponsors" element={<Sponsors />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          </Routes>
+      <Preloader onLoadComplete={() => setAppReady(true)} />
+      <div className={`transition-opacity duration-700 ${appReady ? 'opacity-100' : 'opacity-0'}`}>
+        <main className="flex-grow">
+          <Router>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={
+                <Landing events={events} />
+              } />
+              <Route path="/about" element={<About />} />
+              <Route path="/executive-team" element={<ExecutiveTeam />} />
+              <Route path="/events" element={
+                <Events events={events} />
+              } />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/sponsors" element={<Sponsors />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            </Routes>
 
-        </Router>
-      </main>
+          </Router>
+        </main>
+      </div>
     </div>
   )
 }

@@ -55,7 +55,7 @@
 .hero-background {
   position: absolute;
   inset: 0;
-  background-image: url(/UC-HILL.jpg);
+  background-image: url(/UC-HILL.avif);
   background-size: cover;
   background-position: top;
   animation: heroFadeIn 2s ease-in;
@@ -288,7 +288,7 @@
 .landscape-background {
   position: absolute;
   inset: 0;
-  background-image: url(/TORONTO.jpg);
+  background-image: url(/TORONTO.avif);
   background-size: cover;
   background-position: center;
   opacity: 0.4;
@@ -945,7 +945,7 @@
 .join-background {
   position: absolute;
   inset: 0;
-  background-image: url(/MIDDLESEX.jpg);
+  background-image: url(/MIDDLESEX.avif);
   background-size: cover;
   background-position: center;
   opacity: 0.3;

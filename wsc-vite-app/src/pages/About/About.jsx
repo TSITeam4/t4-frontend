@@ -8,24 +8,24 @@ function About() {
   return (
     <>
       <Nav />
-      <PageTitle 
-        title="About Us" 
-        description="Welcome to the Western Sales Club, where we equip students with the social skillset they need to excel as professionals." 
+      <PageTitle
+        title="About Us"
+        description="Welcome to the Western Sales Club, where we equip students with the social skillset they need to excel as professionals."
       />
       <div className="about-container">
         <section className="about-section">
           <div className="content-flex">
-            <img 
-              src="abt1.png" 
-              alt="Our Mission" 
-              className="content-image" 
+            <img
+              src="abt1.avif"
+              alt="Our Mission"
+              className="content-image"
             />
             <div className="content-text">
               <h3 className="section-title">Mission</h3>
               <p className="section-description">
-                Our mission is to create an inclusive environment that equips members 
-                with the tools, network, and confidence to become influential sales 
-                professionals. By offering workshops, mentorship, and hands-on 
+                Our mission is to create an inclusive environment that equips members
+                with the tools, network, and confidence to become influential sales
+                professionals. By offering workshops, mentorship, and hands-on
                 experiences, we help our members reach their fullest potential.
               </p>
             </div>
@@ -39,16 +39,16 @@ function About() {
             <div className="content-text">
               <h3 className="section-title">Vision</h3>
               <p className="section-description">
-                We envision a future where our members lead with integrity, innovation, 
-                and empathy in sales. Through continuous learning, collaboration, and 
-                community engagement, we aim to shape a new generation of sales leaders 
+                We envision a future where our members lead with integrity, innovation,
+                and empathy in sales. Through continuous learning, collaboration, and
+                community engagement, we aim to shape a new generation of sales leaders
                 who can adapt to a rapidly evolving marketplace.
               </p>
             </div>
-            <img 
-              src="abt2.png" 
-              alt="Our Vision" 
-              className="content-image" 
+            <img
+              src="abt2.avif"
+              alt="Our Vision"
+              className="content-image"
             />
           </div>
         </section>

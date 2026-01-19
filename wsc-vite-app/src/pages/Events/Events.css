@@ -14,7 +14,7 @@
 .events-hero-background {
   position: absolute;
   inset: 0;
-  background-image: url(/TORONTO.jpg);
+  background-image: url(/TORONTO.avif);
   background-size: cover;
   background-position: top;
   opacity: 0.3;

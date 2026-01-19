@@ -6,72 +6,69 @@
                     "id": 1,
                     "name": "Hudson Bates",
                     "title": "Co-President, Co-Founder",
-                    "headshotFileName": "Hudson.png"
+                    "headshotFileName": "Hudson.avif"
                 },
                 {
                     "id": 2,
                     "name": "Connor Hinton",
                     "title": "Co-President, Co-Founder",
-                    "headshotFileName": "Connor.png"
+                    "headshotFileName": "Connor.avif"
                 }
             ]
         },
-
         {
             "vice_presidents": [
                 {
                     "id": 3,
                     "name": "Owen Gerrard",
                     "title": "VP Events, Co-Founder",
-                    "headshotFileName": "Owen.png"
+                    "headshotFileName": "Owen.avif"
                 },
                 {
                     "id": 4,
                     "name": "Jeevan Sahota",
                     "title": "VP Finance, Co-Founder",
-                    "headshotFileName": "Jeevan.png"
+                    "headshotFileName": "Jeevan.avif"
                 },
                 {
                     "id": 5,
                     "name": "Arda Deniz",
                     "title": "VP External, Co-Founder",
-                    "headshotFileName": "Arda.png"
+                    "headshotFileName": "Arda.avif"
                 },
                 {
                     "id": 6,
                     "name": "Joanna Makrostergios",
                     "title": "VP Marketing",
-                    "headshotFileName": "Joanna.png"
+                    "headshotFileName": "Joanna.avif"
                 }
             ]
         },
-        
         {
             "assistant_vice_presidents": [
                 {
                     "id": 7,
                     "name": "Max Stewart",
                     "title": "AVP Events",
-                    "headshotFileName": "Max.png"
+                    "headshotFileName": "Max.avif"
                 },
                 {
                     "id": 8,
                     "name": "Nishaan Mangat",
                     "title": "AVP Finance",
-                    "headshotFileName": "Nishaan.png"
+                    "headshotFileName": "Nishaan.avif"
                 },
-                
                 {
                     "id": 9,
                     "name": "Madison Bates",
                     "title": "AVP External",
-                    "headshotFileName": "Madison.png"
+                    "headshotFileName": "Madison.avif"
                 },
                 {
                     "id": 10,
                     "name": "Liam Hinton",
                     "title": "AVP Marketing",
-                    "headshotFileName": "Liam.png"
+                    "headshotFileName": "Liam.avif"
                 }
             ]
         }
