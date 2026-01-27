@@ -4,6 +4,16 @@ import LazyImage from "./LazyImage";
 
 function Sponsor({ logoFileName, name, description, link }) {
     const [isHovered, setIsHovered] = React.useState(false);
+    const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+
+    React.useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const cardStyles = {
         position: 'relative',
@@ -36,6 +46,7 @@ function Sponsor({ logoFileName, name, description, link }) {
         overflow: 'hidden',
         transition: 'all 0.4s ease',
         minHeight: '200px',
+        width: '100%',
     };
 
     const glowStyles = {
@@ -50,9 +61,18 @@ function Sponsor({ logoFileName, name, description, link }) {
         pointerEvents: 'none',
     };
 
+    // Responsive logo height based on window width
+    const getLogoHeight = () => {
+        if (windowWidth < 640) return '120px'; // Mobile
+        if (windowWidth < 768) return '140px'; // Tablet
+        return '160px'; // Desktop
+    };
+
     const logoStyles = {
         width: '100%',
-        height: '160px',
+        height: getLogoHeight(),
+        maxWidth: '100%',
+        maxHeight: '100%',
         objectFit: 'contain',
         position: 'relative',
         zIndex: 1,
@@ -103,7 +123,7 @@ function Sponsor({ logoFileName, name, description, link }) {
         pointerEvents: 'none',
     };
 
-    const mediaQueryStyles = window.innerWidth >= 768 ? {
+    const mediaQueryStyles = windowWidth >= 768 ? {
         cardStyles: {
             ...cardStyles,
             flexDirection: 'row',
@@ -127,11 +147,11 @@ function Sponsor({ logoFileName, name, description, link }) {
         },
     } : {};
 
-    const finalCardStyles = window.innerWidth >= 768 ? mediaQueryStyles.cardStyles : cardStyles;
-    const finalLogoBlockStyles = window.innerWidth >= 768 ? mediaQueryStyles.logoBlockStyles : logoBlockStyles;
-    const finalContentBlockStyles = window.innerWidth >= 768 ? mediaQueryStyles.contentBlockStyles : contentBlockStyles;
-    const finalTitleStyles = window.innerWidth >= 768 ? mediaQueryStyles.titleStyles : titleStyles;
-    const finalDescriptionStyles = window.innerWidth >= 768 ? mediaQueryStyles.descriptionStyles : descriptionStyles;
+    const finalCardStyles = windowWidth >= 768 ? mediaQueryStyles.cardStyles : cardStyles;
+    const finalLogoBlockStyles = windowWidth >= 768 ? mediaQueryStyles.logoBlockStyles : logoBlockStyles;
+    const finalContentBlockStyles = windowWidth >= 768 ? mediaQueryStyles.contentBlockStyles : contentBlockStyles;
+    const finalTitleStyles = windowWidth >= 768 ? mediaQueryStyles.titleStyles : titleStyles;
+    const finalDescriptionStyles = windowWidth >= 768 ? mediaQueryStyles.descriptionStyles : descriptionStyles;
 
     return (
         <div

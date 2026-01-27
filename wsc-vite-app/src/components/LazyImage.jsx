@@ -36,11 +36,15 @@ function LazyImage({ src, alt, className = '', style = {}, placeholderColor = 'v
         setIsLoaded(true);
     };
 
+    // Extract object-fit from style if provided, otherwise default to 'cover'
+    const { objectFit = 'cover', ...containerStyle } = style;
+    const imageStyle = { objectFit };
+
     return (
         <div
             ref={imgRef}
             className={`lazy-image-container ${className}`}
-            style={style}
+            style={containerStyle}
         >
             <div
                 className={`lazy-image-placeholder ${isLoaded ? 'loaded' : ''}`}
@@ -54,6 +58,7 @@ function LazyImage({ src, alt, className = '', style = {}, placeholderColor = 'v
                     src={src}
                     alt={alt}
                     className={`lazy-image ${isLoaded ? 'loaded' : ''}`}
+                    style={imageStyle}
                     onLoad={handleImageLoad}
                     loading="lazy"
                 />

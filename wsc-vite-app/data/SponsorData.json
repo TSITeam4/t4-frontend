@@ -17,9 +17,16 @@
         {
             "id": 3,
             "name": "DRT Cyber Security",
-            "description": "DRTCyber is a cybersecurity consulting firm that provides services to small and medium-sized businesses. They are a valued sponsor of the WSC that contributes through our guest speaker panels to bring valuable insight to our students.",
+            "description": "DRTCyber is a cybersecurity consulting firm that provides services to small and medium-sized businesses. They are a valued sponsor of the WSC that contributes through our guest speaker panels, and to provide our members with unique networking opportunities.",
             "logoFileName": "DRT.png",
             "link": "https://drtcyber.com"
+        }, 
+        {
+            "id": 4,
+            "name": "College Pro",
+            "description": "College Pro is an entrepreneurial franchise that allows students to operate their own home servicing businesses, focusing on sales, operations, and people management. They are a valued sponsor of the WSC that contributes through our guest speaker panels to bring valuable insight and opportunitiesto our members.",
+            "logoFileName": "CP.png",
+            "link": "https://bottledrop.ca"
         }
     ]
 }
