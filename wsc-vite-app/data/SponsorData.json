@@ -2,31 +2,59 @@
     "sponsors": [
         {
             "id": 1,
-            "name": "Tech for Social Impact (TSI)",
-            "description": "TSI is a student-led organization that provides technology solutions to local non-profit organizations. TSI built this website for us free of charge, denoting their committment to empowering the community. We continue to collaborate with them, helping our clients with their tech-needs.",
+            "name": "College Pro",
+            "description": "College Pro is an entrepreneurial franchise that allows students to operate their own home servicing businesses, focusing on sales, operations, and people management. They are a valued sponsor of the WSC that contributes through our guest speaker panels to bring valuable insight and opportunitiesto our members.",
+            "logoFileName": "CP.png",
+            "link": "https://bottledrop.ca"
+        },
+        {
+            "id": 2,
+            "name": "Vantage Marketing",
+            "description": "Vantage Marketing is a full-service marketing agency that specializes in helping small businesses grow. They are a valued sponsor of the WSC that contributes through our guest speaker panels to bring valuable insight and opportunitiesto our members.",
+            "logoFileName": "VM.png",
+            "link": "https://vantagemarketingcanada.com/"
+        },
+        {
+            "id": 3,
+            "name": "Kick AI",
+            "description": "Kick AI puts the power of professional performance monitoring in your hands, measuring and fine-tuning every move for maximum results. Serving as a virtual coach, they provide the insights needed to turn passion into measurable progress for athletes of all levels.",
+            "logoFileName": "KICK.png",
+            "link": "https://www.kickai.com"
+        },
+        {
+            "id": 4,
+            "name": "DRT Cyber Security",
+            "description": "DRTCyber is a cybersecurity consulting firm that provides services to small and medium-sized businesses. They are a valued sponsor of the WSC that contributes through our guest speaker panels, and to provide our members with unique networking opportunities.",
+            "logoFileName": "DRT.png",
+            "link": "https://drtcyber.com"
+        },
+        {
+            "id": 5,
+            "name": "Tethos Organization",
+            "description": "Tethos, formerly Tech for Social Impact, is a student-led organization providing software and hardware technology solutions to support non-profit organizations. We continue to collaborate with them, as they help our clients with their tech-needs.",
             "logoFileName": "TSI.png",
             "link": "https://uwotsi.com"
         },
         {
-            "id": 2,
+            "id": 6,
+            "name": "Emerald",
+            "description": "Emerald Advisors assists businesses with buy and sell-side transactions, providing comprehensive valuation services and marketing materials. Featured by the Ivey Business School, they offer mentorship and pro-bono M&A advisory services to lower middle-market businesses.",
+            "logoFileName": "EMERALD.png",
+            "link": "https://emeraldadvisors.ca"
+        },
+        {
+            "id": 7,
             "name": "OG Pressure Washing",
             "description": "OG Pressure washing is a local business that specializes in residential pressure washing. Run by our very own Co-Founder and Vice President of Events, Owen Gerrard, OG Pressure Washing exemplifies the leadership and entrepreneurship WSC fosters.",
             "logoFileName": "OGPW.png",
             "link": "https://ogpressurewashing.ca"
         },
         {
-            "id": 3,
-            "name": "DRT Cyber Security",
-            "description": "DRTCyber is a cybersecurity consulting firm that provides services to small and medium-sized businesses. They are a valued sponsor of the WSC that contributes through our guest speaker panels, and to provide our members with unique networking opportunities.",
-            "logoFileName": "DRT.png",
-            "link": "https://drtcyber.com"
-        }, 
-        {
-            "id": 4,
-            "name": "College Pro",
-            "description": "College Pro is an entrepreneurial franchise that allows students to operate their own home servicing businesses, focusing on sales, operations, and people management. They are a valued sponsor of the WSC that contributes through our guest speaker panels to bring valuable insight and opportunitiesto our members.",
-            "logoFileName": "CP.png",
-            "link": "https://bottledrop.ca"
+            "id": 8,
+            "name": "Visionair Marketing",
+            "description": "Testing",
+            "logoFileName": "Visionair.avif",
+            "link": "https://visionai.framer.website"
         }
     ]
 }

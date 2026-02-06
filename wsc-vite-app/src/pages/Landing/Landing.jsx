@@ -1,31 +1,16 @@
 import React from "react";
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
-import emailjs from '@emailjs/browser';
 import './Landing.css';
 import sponsorData from '../../../data/SponsorData.json';
 import Event from '../../components/Event';
+import ContactForm from '../../components/ContactForm';
 import { Link } from "react-router-dom";
 import aboutData from '../../../data/aboutData.json';
 
 function Landing({ events, loading, error }) {
 
     const previewEvents = events?.slice(0, 3) || [];
-    const formRef = React.useRef();
-
-    const sendEmail = (e) => {
-        e.preventDefault();
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-        emailjs.sendForm('service_qwpe0fl', 'template_lt8anmn', formRef.current, publicKey)
-            .then((result) => {
-                alert("Message sent successfully!");
-                e.target.reset();
-            }, (error) => {
-                alert("Failed to send message. Please try again.");
-                console.error(error);
-            });
-    };
 
     const [scrollY, setScrollY] = React.useState(0);
 
@@ -260,111 +245,7 @@ function Landing({ events, loading, error }) {
                             </p>
                         </div>
 
-                        <div className="contact-card">
-                            <div className="contact-grid">
-                                <div className="contact-info">
-                                    <h3 className="contact-info-title">Connect With Us</h3>
-                                    <div className="contact-links">
-                                        <div className="contact-link-item">
-                                            <a
-                                                href="https://www.linkedin.com/company/western-sales-club/"
-                                                aria-label="LinkedIn"
-                                            >
-                                                <img
-                                                    src="/Linkedin.svg"
-                                                    alt="LinkedIn"
-                                                />
-                                            </a>
-                                            <span className="contact-link-text">Western Sales Club</span>
-                                        </div>
-
-                                        <div className="contact-link-item">
-                                            <a
-                                                href="https://www.instagram.com/westernsalesclub/"
-                                                aria-label="Instagram"
-                                            >
-                                                <img
-                                                    src="/Instagram.svg"
-                                                    alt="Instagram"
-                                                />
-                                            </a>
-                                            <span className="contact-link-text">@westernsalesclub</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="contact-form-wrapper">
-                                    <h3 className="contact-form-title">Send Us a Message</h3>
-                                    <form className="contact-form" onSubmit={sendEmail} ref={formRef}>
-                                        <div className="form-group">
-                                            <label htmlFor="name">
-                                                Your Name*
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="name"
-                                                name="name"
-                                                placeholder="John Doe"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="email">
-                                                Your Email*
-                                            </label>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                name="email"
-                                                placeholder="johndoe@example.com"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="organization_type">
-                                                Organization Type (optional)
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="organization_type"
-                                                name="organization_type"
-                                                placeholder="Who are you representing?"
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="subject">
-                                                Subject*
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="subject"
-                                                name="subject"
-                                                placeholder="How can we help you?"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="message">
-                                                Your Message*
-                                            </label>
-                                            <textarea
-                                                id="message"
-                                                name="message"
-                                                rows={4}
-                                                placeholder="Write your message here..."
-                                                required
-                                            ></textarea>
-                                        </div>
-                                        <button
-                                            type="submit"
-                                            className="contact-submit-button"
-                                        >
-                                            Send Message
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <ContactForm />
                     </div>
                 </section>
 

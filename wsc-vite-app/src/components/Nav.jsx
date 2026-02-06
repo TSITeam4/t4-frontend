@@ -17,9 +17,9 @@ function Nav() {
   }, [isOpen]);
 
   const getLinkClass = (path) =>
-    location.pathname === path 
-        ? "text-white font-semi-bold"
-        : "text-white opacity-60";   
+    location.pathname === path
+      ? "text-white font-semi-bold"
+      : "text-white opacity-60";
 
   return (
     <header className="top-0 left-0 w-full z-50 text-white bg-transparent">
@@ -34,9 +34,8 @@ function Nav() {
         </button>
         <a href="/" className="text-md pr-4 lg:text-2xl font-bold">Western Sales Club</a>
         <nav
-          className={`fixed inset-0 bg-black text-white flex flex-col items-center justify-center transition-transform transform z-[9999] ${
-            isOpen ? "translate-x-0" : "-translate-x-full"
-          } md:static md:translate-x-0 md:bg-transparent md:flex-row md:space-x-4 md:z-auto`}
+          className={`fixed inset-0 bg-black text-white flex flex-col items-center justify-center transition-transform transform z-[9999] ${isOpen ? "translate-x-0" : "-translate-x-full"
+            } md:static md:translate-x-0 md:bg-transparent md:flex-row md:space-x-4 md:z-auto`}
         >
           <button
             className="absolute top-3 right-3 text-white text-2xl focus:outline-none md:hidden bg-[#4f2683]"
@@ -48,7 +47,7 @@ function Nav() {
             <li><Link to="/about" className={`${getLinkClass("/about")} text-sm md:text-md lg:text-lg whitespace-nowrap`} onClick={() => setIsOpen(false)}>About Us</Link></li>
             <li><Link to="/executive-team" className={`${getLinkClass("/executive-team")} text-sm md:text-md lg:text-lg whitespace-nowrap`} onClick={() => setIsOpen(false)}>Executive Team</Link></li>
             <li><Link to="/events" className={`${getLinkClass("/events")} text-sm md:text-md lg:text-lg whitespace-nowrap`} onClick={() => setIsOpen(false)}>Events</Link></li>
-            <li><Link to="/sponsors" className={`${getLinkClass("/sponsors")} text-sm md:text-md lg:text-lg whitespace-nowrap`} onClick={() => setIsOpen(false)}>Sponsors</Link></li>
+            <li><Link to="/sponsors" className={`${getLinkClass("/sponsors")} text-sm md:text-md lg:text-lg whitespace-nowrap`} onClick={() => setIsOpen(false)}>Partners</Link></li>
             <li><Link to="/contact-us" className={`${getLinkClass("/contact-us")} text-sm md:text-md lg:text-lg whitespace-nowrap`} onClick={() => setIsOpen(false)}>Contact Us</Link></li>
           </ul>
         </nav>

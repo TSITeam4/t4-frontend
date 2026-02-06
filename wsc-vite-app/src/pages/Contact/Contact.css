@@ -1,75 +1,7 @@
 /* Contact Page Styles */
 @import '../../index.css';
 
-/* ========== Contact Form Section ========== */
-.contact-page-container {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0 3rem 3rem;
-}
-
-.contact-form-section {
-  padding-bottom: 3rem;
-  width: 100%;
-  max-width: 28rem;
-  margin: 0 auto;
-}
-
-.contact-page-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.contact-page-input,
-.contact-page-textarea {
-  padding: 0.75rem;
-  background-color: white;
-  color: black;
-  border: none;
-  outline: none;
-  font-family: 'Georgia', Times, serif;
-  font-size: 1rem;
-  transition: box-shadow 0.2s ease;
-}
-
-.contact-page-input:focus,
-.contact-page-textarea:focus {
-  box-shadow: 0 0 0 2px var(--wsc-purple);
-}
-
-.contact-page-input::placeholder,
-.contact-page-textarea::placeholder {
-  color: #6b7280;
-  font-family: 'Georgia', Times, serif;
-}
-
-.contact-page-textarea {
-  resize: vertical;
-  min-height: 6rem;
-}
-
-.contact-page-submit {
-  font-weight: bold;
-  padding: 0.75rem;
-  border: none;
-  cursor: pointer;
-  font-family: 'Georgia', Times, serif;
-  font-size: 1rem;
-  border: 2px solid rgba(var(--wsc-purple-rgb), 0.4);
-  transition: all 0.2s ease;
-}
-
-.contact-page-submit:hover {
-  background-color: rgba(var(--wsc-purple-rgb), 0.6);
-  border-color: var(--wsc-purple);
-}
-
-.contact-page-submit:active {
-  transform: scale(0.98);
-}
-
+/* Only the spacer remains - all other styles moved to ContactForm.css */
 .contact-page-spacer {
   padding-bottom: 5rem;
 }

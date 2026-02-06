@@ -7,7 +7,7 @@ import sponsorData from '../../../data/SponsorData.json';
 
 function Sponsors() {
     const [scrollY, setScrollY] = React.useState(0);
-    
+
     React.useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
         window.addEventListener('scroll', handleScroll);
@@ -19,7 +19,7 @@ function Sponsors() {
             {/* Hero Section */}
             <div className="sponsors-hero">
                 <div className="contents relative z-10">
-                    <Nav/>
+                    <Nav />
                 </div>
                 <div
                     className="sponsors-hero-background"
@@ -27,9 +27,9 @@ function Sponsors() {
                 ></div>
                 <div className="sponsors-hero-content">
                     <div>
-                        <h1 className="sponsors-hero-title">Our Sponsors</h1>
+                        <h1 className="sponsors-hero-title">Our Partners</h1>
                         <p className="sponsors-hero-description">
-                            Our sponsors empower us to deliver our events and fulfill our mission to 
+                            Our partners empower us to deliver our events and fulfill our mission to
                             equip students with the social skillset they need to excel as professionals.
                             We are truly grateful for their support and collaborative efforts.
                         </p>
@@ -48,7 +48,7 @@ function Sponsors() {
                     />
                 ))}
             </div>
-            
+
             <Footer />
         </>
     );
