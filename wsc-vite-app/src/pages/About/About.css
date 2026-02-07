@@ -38,7 +38,7 @@
     flex-direction: row;
     gap: 4rem;
   }
-  
+
   .content-flex.reverse {
     flex-direction: row-reverse;
   }
@@ -63,7 +63,7 @@
 
 .content-image:hover {
   transform: translateY(-8px);
-  box-shadow: 
+  box-shadow:
     0 20px 40px rgba(79, 38, 131, 0.3),
     0 0 60px rgba(218, 165, 32, 0.2);
   border-color: var(--wsc-gold);
@@ -75,7 +75,7 @@
 
 .section-description {
   margin-top: 1.5rem;
-  color: var(--wsc-light);
+  color: rgba(var(--wsc-light-rgb), 0.8);
   font-size: 1rem;
   line-height: 1.8;
   text-align: center;
@@ -155,9 +155,12 @@
 }
 
 @keyframes aboutShimmer {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(-25%, -25%) rotate(0deg);
   }
+
   50% {
     transform: translate(-25%, -25%) rotate(180deg);
   }
@@ -166,7 +169,7 @@
 .value-card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: var(--wsc-gold);
-  box-shadow: 
+  box-shadow:
     0 20px 40px rgba(218, 165, 32, 0.2),
     0 0 60px rgba(79, 38, 131, 0.2),
     inset 0 0 80px rgba(218, 165, 32, 0.1);
@@ -255,7 +258,7 @@
 
 .value-card:hover .value-card-icon {
   transform: rotate(360deg) scale(1.1);
-  box-shadow: 
+  box-shadow:
     0 0 30px rgba(218, 165, 32, 0.6),
     0 0 60px rgba(79, 38, 131, 0.4),
     inset 0 0 20px rgba(218, 165, 32, 0.2);
@@ -267,15 +270,15 @@
   .about-container {
     padding: 2rem 1.5rem;
   }
-  
+
   .values-title {
     font-size: 2rem;
   }
-  
+
   .value-card {
     padding: 2rem 1.5rem;
   }
-  
+
   .value-card-icon {
     width: 56px;
     height: 56px;

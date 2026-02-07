@@ -26,7 +26,7 @@ function Event({ event }) {
         margin: '0 auto',
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         backdropFilter: 'blur(10px)',
-        boxShadow: isHovered 
+        boxShadow: isHovered
             ? '0 20px 40px rgba(218, 165, 32, 0.3), 0 0 60px rgba(79, 38, 131, 0.3)'
             : '0 4px 6px rgba(0, 0, 0, 0.1)',
         transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
@@ -34,7 +34,7 @@ function Event({ event }) {
     };
 
     const dateBlockStyles = {
-        background: isHovered 
+        background: isHovered
             ? 'linear-gradient(135deg, var(--wsc-purple) 0%, var(--wsc-gold) 100%)'
             : 'var(--wsc-purple)',
         color: 'white',
@@ -129,9 +129,10 @@ function Event({ event }) {
     };
 
     const descriptionStyles = {
-        color: '#e5e7eb',
+        color: 'rgba(var(--wsc-light-rgb), 0.8)',
         lineHeight: '1.6',
         position: 'relative',
+        fontSize: '1rem',
         zIndex: 1,
     };
 
@@ -166,7 +167,7 @@ function Event({ event }) {
     const finalContentBlockStyles = window.innerWidth >= 768 ? mediaQueryStyles.contentBlockStyles : contentBlockStyles;
 
     return (
-        <div 
+        <div
             style={finalCardStyles}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

@@ -104,7 +104,7 @@ function Sponsor({ logoFileName, name, description, link }) {
     };
 
     const descriptionStyles = {
-        color: '#e5e7eb',
+        color: 'rgba(var(--wsc-light-rgb), 0.8)',
         lineHeight: '1.6',
         fontSize: '1rem',
         position: 'relative',

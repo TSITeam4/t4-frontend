@@ -31,7 +31,7 @@
         {
             "id": 5,
             "name": "Tethos Organization",
-            "description": "Tethos, formerly Tech for Social Impact, is a student-led organization providing software and hardware technology solutions to support non-profit organizations. We continue to collaborate with them, as they help our clients with their tech-needs.",
+            "description": "Tethos, formerly Tech for Social Impact, is a student-led organization providing software and hardware technology solutions to support non-profit organizations in our community. The Tethos projects team voluntarily built this website for us, and we continue to collaborate with them as they empower our clients with technology-based solutions.",
             "logoFileName": "TSI.png",
             "link": "https://uwotsi.com"
         },
@@ -45,14 +45,14 @@
         {
             "id": 7,
             "name": "OG Pressure Washing",
-            "description": "OG Pressure washing is a local business that specializes in residential pressure washing. Run by our very own Co-Founder and Vice President of Events, Owen Gerrard, OG Pressure Washing exemplifies the leadership and entrepreneurship WSC fosters.",
+            "description": "OG Pressure Washing excels at teaching our members crucial sales skills through door-to-dor sales of residential pressure washing services. Run by our very own Co-Founder, Owen Gerrard, OG Pressure Washing represents the initiative, persistence, and committment to community that WSC fosters.",
             "logoFileName": "OGPW.png",
             "link": "https://ogpressurewashing.ca"
         },
         {
             "id": 8,
             "name": "Visionair Marketing",
-            "description": "Testing",
+            "description": "Visionair enables the Western Sales Club Agency to connect with real business owners, selling high quality marketing services. This partnership grants our members valuable interpersonal sales experience and helps small businesses bring their vision to life.  Run by our very own Co-Founder, Owen Gerrard, Visionair represents the entrepreneurship WSC fosters.",
             "logoFileName": "Visionair.avif",
             "link": "https://visionai.framer.website"
         }
