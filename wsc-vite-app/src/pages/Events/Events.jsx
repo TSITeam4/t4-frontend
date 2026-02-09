@@ -1,8 +1,8 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
 import './Events.css';
-import Event from '../../components/Event';
+import Event from '../../components/event/Event';
 
 function Events({ events }) {
     const [scrollY, setScrollY] = React.useState(0);

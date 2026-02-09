@@ -1,8 +1,8 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import PageTitle from '../../components/PageTitle';
-import Profile from '../../components/Profile';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
+import PageTitle from '../../components/page-title/PageTitle';
+import Profile from '../../components/profile/Profile';
 import './ExecutiveTeam.css';
 import teamData from '../../../data/TeamData.json';
 

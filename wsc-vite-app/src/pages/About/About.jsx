@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import PageTitle from "../../components/PageTitle";
-import LazyImage from '../../components/LazyImage';
-import GallerySection from '../../components/GallerySection';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
+import PageTitle from "../../components/page-title/PageTitle";
+import LazyImage from '../../components/lazy-image/LazyImage';
+import GallerySection from '../../components/gallery/GallerySection';
 import './About.css';
 
 const GALLERY_DEMO_STATE = 'success'; // FOR DEBUGGING: success, loading, error, empty

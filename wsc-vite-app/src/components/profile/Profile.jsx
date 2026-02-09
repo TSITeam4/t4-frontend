@@ -1,5 +1,5 @@
 import React from "react";
-import LazyImage from "./LazyImage";
+import LazyImage from "../lazy-image/LazyImage";
 
 function Profile({ headshotFileName, name, title }) {
 

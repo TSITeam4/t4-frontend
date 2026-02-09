@@ -1,10 +1,10 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
 import './Landing.css';
 import sponsorData from '../../../data/SponsorData.json';
-import Event from '../../components/Event';
-import ContactForm from '../../components/ContactForm';
+import Event from '../../components/event/Event';
+import ContactForm from '../../components/contact-form/ContactForm';
 import { Link } from "react-router-dom";
 import aboutData from '../../../data/aboutData.json';
 

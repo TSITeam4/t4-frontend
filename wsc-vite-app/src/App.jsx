@@ -27,7 +27,7 @@ const ScrollToTop = () => {
   return null;
 }
 
-import Preloader from "./components/Preloader"
+import Preloader from "./components/preloader/Preloader"
 
 function App() {
 

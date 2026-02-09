@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LazyImage from "./LazyImage";
+import LazyImage from "../lazy-image/LazyImage";
 
 function Sponsor({ logoFileName, name, description, link }) {
     const [isHovered, setIsHovered] = React.useState(false);

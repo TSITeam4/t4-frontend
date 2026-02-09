@@ -1,7 +1,7 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import Sponsor from '../../components/Sponsor';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
+import Sponsor from '../../components/sponsor/Sponsor';
 import './Sponsors.css';
 import sponsorData from '../../../data/SponsorData.json';
 

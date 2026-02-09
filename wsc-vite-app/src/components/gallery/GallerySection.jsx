@@ -1,5 +1,5 @@
 import React from 'react';
-import LazyImage from './LazyImage';
+import LazyImage from '../lazy-image/LazyImage';
 
 /**
  * GallerySection — responsive photo grid with loading / empty / error states.
