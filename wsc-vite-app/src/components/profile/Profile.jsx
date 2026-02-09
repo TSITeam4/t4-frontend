@@ -3,7 +3,7 @@ import LazyImage from "../lazy-image/LazyImage";
 
 function Profile({ headshotFileName, name, title }) {
 
-  const headshotImage = new URL(`../../data/headshots/${headshotFileName}`, import.meta.url).href;
+  const headshotImage = new URL(`../../../data/headshots/${headshotFileName}`, import.meta.url).href;
 
   return (
     <div className="flex flex-col items-center justify-center mx-auto">
