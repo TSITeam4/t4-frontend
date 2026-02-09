@@ -85,9 +85,9 @@ function Nav() {
         </button>
 
         {/* ==================== LOGO ==================== */}
-        <a href="/" className="text-md pr-4 lg:text-2xl font-bold">
+        <Link to="/" className="text-md pr-4 lg:text-2xl font-bold">
           Western Sales Club
-        </a>
+        </Link>
 
         {/* ==================== DESKTOP NAVIGATION ==================== */}
         <nav className="hidden md:flex desktop-nav">
