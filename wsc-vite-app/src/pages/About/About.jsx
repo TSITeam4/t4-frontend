@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import PageTitle from "../../components/PageTitle";
 import LazyImage from '../../components/LazyImage';
+import GallerySection from '../../components/GallerySection';
 import './About.css';
 
+const GALLERY_DEMO_STATE = 'success'; // FOR DEBUGGING: success, loading, error, empty
+
+const MOCK_GALLERY_PHOTOS = [
+  { id: '1', src: '/UC-HILL.avif',  alt: 'Club members at UC Hill',  caption: null },
+  { id: '2', src: '/TORONTO.avif',  alt: 'Toronto networking trip',   caption: null },
+  { id: '3', src: '/MIDDLESEX.avif', alt: 'Event at Middlesex College', caption: null },
+];
+
 function About() {
+  /* ── Gallery state (will be replaced by a Supabase hook) ── */
+  const [galleryPhotos]  = useState(GALLERY_DEMO_STATE === 'success' ? MOCK_GALLERY_PHOTOS : []);
+  const [galleryLoading] = useState(GALLERY_DEMO_STATE === 'loading');
+  const [galleryError]   = useState(GALLERY_DEMO_STATE === 'error' ? 'Failed to load gallery' : null);
+
+  const handleGalleryRetry = useCallback(() => {
+    // Will trigger a refetch once Supabase is wired
+    console.log('Gallery retry requested');
+  }, []);
+
   return (
     <>
       <Nav />
@@ -22,7 +41,7 @@ function About() {
               className="content-image"
             />
             <div className="content-text">
-              <h3 className="section-title">Mission</h3>
+              <h3 className="section-title">Our Mission</h3>
               <p className="section-description">
                 Our mission is to create an inclusive environment that equips members
                 with the tools, network, and confidence to become influential sales
@@ -38,7 +57,7 @@ function About() {
         <section className="about-section">
           <div className="content-flex reverse">
             <div className="content-text">
-              <h3 className="section-title">Vision</h3>
+              <h3 className="section-title">Our Vision</h3>
               <p className="section-description">
                 We envision a future where our members lead with integrity, innovation,
                 and empathy in sales. Through continuous learning, collaboration, and
@@ -55,6 +74,16 @@ function About() {
         </section>
 
         <hr className="section-divider" />
+
+        {/* ── Photo Gallery ──────────────────────────────── */}
+        <GallerySection
+          photos={galleryPhotos}
+          loading={galleryLoading}
+          error={galleryError}
+          onRetry={handleGalleryRetry}
+        />
+
+        {/* <hr className="section-divider" />
 
         <section className="about-section values-section">
           <div className="values-container">
@@ -102,6 +131,8 @@ function About() {
             </div>
           </div>
         </section>
+
+        <hr className="section-divider" /> */}
       </div>
       <Footer />
     </>

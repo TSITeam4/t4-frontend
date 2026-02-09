@@ -1,2 +1,0 @@
-{/* ARTIFACT – Configuration file for backend */}
-export const BASE_URL = "https://flask-app-250624862173.us-central1.run.app"; 
