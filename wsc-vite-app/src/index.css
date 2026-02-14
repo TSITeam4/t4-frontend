@@ -26,7 +26,8 @@
   margin: 0;
   padding: 0;
 
-  color-scheme: light dark;
+  /* Lock to dark theme; ignore system light/dark preference */
+  color-scheme: dark;
   color: var(--wsc-light);
   background-color: var(--wsc-dark);
 
@@ -112,24 +113,3 @@ a:hover {
   color: var(--wsc-gold);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: var(--wsc-light);
-    background-color: var(--wsc-dark);
-  }
-  a:hover {
-    color: var(--wsc-gold);
-  }
-  button {
-    background-color: rgba(var(--wsc-purple-rgb), 0.2);
-    border: 1px solid rgba(var(--wsc-purple-rgb), 0.4);
-    color: var(--wsc-light);
-    letter-spacing: 0.03em;
-  }
-  button:hover {
-    background-color: rgba(var(--wsc-purple-rgb), 0.5);
-    border-color: var(--wsc-purple);
-    color: var(--wsc-light);
-    letter-spacing: 0.03em;
-  }
-}

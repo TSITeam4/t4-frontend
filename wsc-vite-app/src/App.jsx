@@ -10,11 +10,14 @@ import ContactUs from "./pages/Contact/Contact"
 import Sponsors from "./pages/Sponsors/Sponsors"
 import TermsOfService from "./pages/TermsOfService"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
-import EventData from "../data/EventData.json"
+import AdminAuthProvider from "./contexts/AdminAuthProvider"
+import AdminDashboard from "./pages/Admin/AdminDashboard"
+import ErrorBoundary from "./components/shared/ErrorBoundary"
+import { useSupabaseQuery } from "./lib/hooks/useSupabaseQuery"
 import "./App.css"
 
 const ScrollToTop = () => {
-  const location = useLocation(); // Import useLocation from react-router-dom
+  const location = useLocation();
 
   React.useEffect(() => {
     window.scrollTo({
@@ -22,7 +25,7 @@ const ScrollToTop = () => {
       left: 0,
       behavior: 'instant'
     });
-  }, [location.pathname]); // Re-run whenever the route changes
+  }, [location.pathname]);
 
   return null;
 }
@@ -30,55 +33,50 @@ const ScrollToTop = () => {
 import Preloader from "./components/preloader/Preloader"
 
 function App() {
-
-  const [events, setEvents] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
   const [appReady, setAppReady] = React.useState(false);
-  const [error, setError] = React.useState(null);
 
-  React.useEffect(() => {
-    try {
-      if (EventData && Array.isArray(EventData.events)) {
-        setEvents(EventData.events);
-        console.log("Loaded events from EventData.json:", EventData.events);
-      } else {
-        console.error("Unexpected EventData format:", EventData);
-        setError("Unexpected data format");
-      }
-    } catch (err) {
-      console.error("Failed to load events:", err);
-      setError("Failed to load events");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  // Fetch events from Supabase (public read — RLS filters to published only)
+  const {
+    data: events,
+    loading,
+    error,
+  } = useSupabaseQuery('events', {
+    orderBy: 'date',
+    ascending: false,
+  });
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Preloader onLoadComplete={() => setAppReady(true)} />
-      <div className={`transition-opacity duration-700 ${appReady ? 'opacity-100' : 'opacity-0'}`}>
-        <main className="flex-grow">
-          <Router>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={
-                <Landing events={events} />
-              } />
-              <Route path="/about" element={<About />} />
-              <Route path="/executive-team" element={<ExecutiveTeam />} />
-              <Route path="/events" element={
-                <Events events={events} />
-              } />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/sponsors" element={<Sponsors />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            </Routes>
-
-          </Router>
-        </main>
+    <ErrorBoundary>
+      <div className="flex flex-col min-h-screen">
+        <Preloader onLoadComplete={() => setAppReady(true)} />
+        <div className={`transition-opacity duration-700 ${appReady ? 'opacity-100' : 'opacity-0'}`}>
+          <main className="flex-grow">
+            <Router>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={
+                  <Landing events={events} loading={loading} error={error} />
+                } />
+                <Route path="/about" element={<About />} />
+                <Route path="/executive-team" element={<ExecutiveTeam />} />
+                <Route path="/events" element={
+                  <Events events={events} loading={loading} error={error} />
+                } />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/sponsors" element={<Sponsors />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/admin" element={
+                  <AdminAuthProvider>
+                    <AdminDashboard />
+                  </AdminAuthProvider>
+                } />
+              </Routes>
+            </Router>
+          </main>
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   )
 }
 

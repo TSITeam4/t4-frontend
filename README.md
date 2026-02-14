@@ -1,15 +1,42 @@
-# Western Sales Club Website Codebase
+# Western Sales Club — Website
 
-This repository contains the frontend code for the Western Sales Club website built by **[Tech for Social Impact](https://uwotsi.com)** (TSI). 
-
-The repository is called _t4-frontend_ because this website was built by the Winter 2025 Team 4 of TSI, and there were originally separate frontend and backend code repositories, but only the frontend code is in use now. 
-
-## Updating the Website Content 
-
-If you plan on updating content like **executive team**, **sponsors**, or **events**, navigate to the `wsc-vite-app/` folder. 
-
-The ability to modify this data is provisioned by the Western Sales Club executive team.
+Official site for [Western Sales Club](https://westernsalesclub.ca): React frontend and Supabase backend (content, auth, storage).
 
 ## Structure
 
-`wsc-vite-app/` Contains the main frontend application source code. 
+| Path | Role |
+|------|------|
+| **wsc-vite-app/** | React + Vite app (Landing, About, Team, Events, Sponsors, Contact, Admin) |
+| **supabase/** | Backend: Postgres schema, RLS, storage buckets, migrations |
+
+## Quick start
+
+**Prerequisites:** Node 18+, [Supabase CLI](https://supabase.com/docs/guides/cli) (optional, for local backend).
+
+1. **Install and run the app**
+   ```bash
+   cd wsc-vite-app
+   npm install
+   npm run dev
+   ```
+   App runs at `http://localhost:5173`.
+
+2. **Environment**
+   - In `wsc-vite-app/.env`, set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` for your Supabase project.
+
+3. **Backend**
+   - Use an existing Supabase project or run locally: `supabase start` from the repo root. See [supabase/README.md](supabase/README.md) for schema, security, and migrations.
+
+## Scripts (from `wsc-vite-app/`)
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview production build |
+| `npm run deploy` | Build and deploy (e.g. gh-pages) |
+
+## Tech Stack
+
+- **Frontend:** React 19, Vite 6, React Router, Tailwind CSS, Supabase client
+- **Backend:** Supabase (Postgres, Auth, Storage, RLS). Details in [supabase/README.md](supabase/README.md).

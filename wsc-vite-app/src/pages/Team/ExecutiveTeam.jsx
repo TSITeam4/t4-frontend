@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Nav from '../../components/nav/Nav';
 import Footer from '../../components/footer/Footer';
 import PageTitle from '../../components/page-title/PageTitle';
 import Profile from '../../components/profile/Profile';
 import './ExecutiveTeam.css';
-import teamData from '../../../data/TeamData.json';
+import { useSupabaseQuery } from '../../lib/hooks/useSupabaseQuery';
+import AsyncStateWrapper from '../../components/shared/AsyncStateWrapper';
 
 function ExecutiveTeam() {
-    const presidents = teamData.executives.find(exec => exec.presidents)?.presidents || [];
-    const vicePresidents = teamData.executives.find(exec => exec.vice_presidents)?.vice_presidents || [];
-    const assistantVicePresidents = teamData.executives.find(exec => exec.assistant_vice_presidents)?.assistant_vice_presidents || [];
+    const { data: executives, loading, error, refetch } = useSupabaseQuery('executives');
+
+    // Group executives by the "group" column
+    const presidents = useMemo(
+        () => executives.filter((e) => e.group === 'president'),
+        [executives]
+    );
+    const vicePresidents = useMemo(
+        () => executives.filter((e) => e.group === 'vice_president'),
+        [executives]
+    );
+    const assistantVicePresidents = useMemo(
+        () => executives.filter((e) => e.group === 'assistant_vice_president'),
+        [executives]
+    );
 
     return (
         <>
@@ -20,46 +33,60 @@ function ExecutiveTeam() {
                 Our executives are dedicated to providing students with the resources and opportunities they need to succeed in sales."
             />
 
-            <div className="team-page-container">
-                <h3 className="team-section-title">Our Presidents</h3>
-                <hr className="team-section-divider" />
-                <div className="team-grid-presidents">
-                    {presidents.map(president => (
-                        <Profile
-                            key={president.id}
-                            headshotFileName={president.headshotFileName}
-                            name={president.name}
-                            title={president.title}
-                        />
-                    ))}
-                </div>
+            <AsyncStateWrapper
+                loading={loading}
+                error={error}
+                data={executives}
+                onRetry={refetch}
+                emptyMessage="Executive team info coming soon!"
+            >
+                <div className="team-page-container">
+                    {presidents.length > 0 && (
+                        <>
+                            <h3 className="team-section-title">Our Presidents</h3>
+                            <hr className="team-section-divider" />
+                            <div className="team-grid-presidents">
+                                {presidents.map(exec => (
+                                    <Profile
+                                        key={exec.id}
+                                        executive={exec}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    )}
 
-                <h3 className="team-section-title">Vice Presidents</h3>
-                <hr className="team-section-divider" />
-                <div className="team-grid-vps">
-                    {vicePresidents.map(vp => (
-                        <Profile
-                            key={vp.id}
-                            headshotFileName={vp.headshotFileName}
-                            name={vp.name}
-                            title={vp.title}
-                        />
-                    ))}
-                </div>
+                    {vicePresidents.length > 0 && (
+                        <>
+                            <h3 className="team-section-title">Vice Presidents</h3>
+                            <hr className="team-section-divider" />
+                            <div className="team-grid-vps">
+                                {vicePresidents.map(vp => (
+                                    <Profile
+                                        key={vp.id}
+                                        executive={vp}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    )}
 
-                <h3 className="team-section-title">Assistant Vice Presidents</h3>
-                <hr className="team-section-divider" />
-                <div className="team-grid-avps">
-                    {assistantVicePresidents.map(avp => (
-                        <Profile
-                            key={avp.id}
-                            headshotFileName={avp.headshotFileName}
-                            name={avp.name}
-                            title={avp.title}
-                        />
-                    ))}
+                    {assistantVicePresidents.length > 0 && (
+                        <>
+                            <h3 className="team-section-title">Assistant Vice Presidents</h3>
+                            <hr className="team-section-divider" />
+                            <div className="team-grid-avps">
+                                {assistantVicePresidents.map(avp => (
+                                    <Profile
+                                        key={avp.id}
+                                        executive={avp}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    )}
                 </div>
-            </div>
+            </AsyncStateWrapper>
             
             <Footer />
         </>

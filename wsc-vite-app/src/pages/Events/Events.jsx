@@ -3,8 +3,9 @@ import Nav from '../../components/nav/Nav';
 import Footer from '../../components/footer/Footer';
 import './Events.css';
 import Event from '../../components/event/Event';
+import AsyncStateWrapper from '../../components/shared/AsyncStateWrapper';
 
-function Events({ events }) {
+function Events({ events = [], loading = false, error = null }) {
     const [scrollY, setScrollY] = React.useState(0);
     
     React.useEffect(() => {
@@ -36,15 +37,16 @@ function Events({ events }) {
             </div>
             
             <div className="events-page-container">
-                { events.length === 0 ? (
-                    <div className="events-empty-message">
-                        <p>No upcoming events...</p>
-                    </div>
-                ) : (
-                    events.map((event) => (
+                <AsyncStateWrapper
+                    loading={loading}
+                    error={error}
+                    data={events}
+                    emptyMessage="No upcoming events — check back soon!"
+                >
+                    {events.filter(Boolean).map((event) => (
                         <Event key={event.id} event={event} />
-                    ))
-                )}
+                    ))}
+                </AsyncStateWrapper>
             </div>
 
             <Footer />

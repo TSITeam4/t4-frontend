@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LazyImage from "../lazy-image/LazyImage";
+import { getPublicUrl } from "../../lib/storageUtils";
 
-function Sponsor({ logoFileName, name, description, link }) {
+function Sponsor({ sponsor }) {
     const [isHovered, setIsHovered] = React.useState(false);
     const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+
+    // Build public URL from Supabase storage using the logo_path object name
+    const logoUrl = getPublicUrl('sponsor-logos', sponsor?.logo_path);
 
     React.useEffect(() => {
         const handleResize = () => {
@@ -63,9 +67,9 @@ function Sponsor({ logoFileName, name, description, link }) {
 
     // Responsive logo height based on window width
     const getLogoHeight = () => {
-        if (windowWidth < 640) return '120px'; // Mobile
-        if (windowWidth < 768) return '140px'; // Tablet
-        return '160px'; // Desktop
+        if (windowWidth < 640) return '120px';
+        if (windowWidth < 768) return '140px';
+        return '160px';
     };
 
     const logoStyles = {
@@ -162,10 +166,10 @@ function Sponsor({ logoFileName, name, description, link }) {
             {/* LOGO BLOCK */}
             <div style={finalLogoBlockStyles}>
                 <div style={glowStyles}></div>
-                <Link to={link} target="_blank" rel="noopener noreferrer" style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <Link to={sponsor?.link || '#'} target="_blank" rel="noopener noreferrer" style={{ position: 'relative', zIndex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <LazyImage
-                        src={new URL(`../../../data/sponsor-logos/${logoFileName}`, import.meta.url).href}
-                        alt={name}
+                        src={logoUrl || ''}
+                        alt={sponsor?.name ?? 'Sponsor'}
                         style={logoStyles}
                     />
                 </Link>
@@ -174,8 +178,8 @@ function Sponsor({ logoFileName, name, description, link }) {
             {/* CONTENT BLOCK */}
             <div style={finalContentBlockStyles}>
                 <div style={shimmerStyles}></div>
-                <h3 style={finalTitleStyles}>{name}</h3>
-                <p style={finalDescriptionStyles}>{description}</p>
+                <h3 style={finalTitleStyles}>{sponsor?.name ?? 'Sponsor'}</h3>
+                <p style={finalDescriptionStyles}>{sponsor?.description ?? ''}</p>
             </div>
         </div>
     );
