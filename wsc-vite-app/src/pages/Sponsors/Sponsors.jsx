@@ -1,12 +1,15 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import Sponsor from '../../components/Sponsor';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
+import Sponsor from '../../components/sponsor/Sponsor';
 import './Sponsors.css';
-import sponsorData from '../../../data/SponsorData.json';
+import { useSupabaseQuery } from '../../lib/hooks/useSupabaseQuery';
+import AsyncStateWrapper from '../../components/shared/AsyncStateWrapper';
 
 function Sponsors() {
     const [scrollY, setScrollY] = React.useState(0);
+
+    const { data: sponsors, loading, error, refetch } = useSupabaseQuery('sponsors');
 
     React.useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
@@ -38,15 +41,20 @@ function Sponsors() {
             </div>
 
             <div className="sponsors-page-container">
-                {sponsorData.sponsors.map(sponsor => (
-                    <Sponsor
-                        key={sponsor.id}
-                        logoFileName={sponsor.logoFileName}
-                        name={sponsor.name}
-                        description={sponsor.description}
-                        link={sponsor.link}
-                    />
-                ))}
+                <AsyncStateWrapper
+                    loading={loading}
+                    error={error}
+                    data={sponsors}
+                    onRetry={refetch}
+                    emptyMessage="No sponsors yet — check back soon!"
+                >
+                    {sponsors.filter(Boolean).map(sponsor => (
+                        <Sponsor
+                            key={sponsor.id}
+                            sponsor={sponsor}
+                        />
+                    ))}
+                </AsyncStateWrapper>
             </div>
 
             <Footer />

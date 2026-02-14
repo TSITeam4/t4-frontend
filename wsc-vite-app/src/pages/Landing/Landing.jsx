@@ -1,16 +1,22 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
 import './Landing.css';
-import sponsorData from '../../../data/SponsorData.json';
-import Event from '../../components/Event';
-import ContactForm from '../../components/ContactForm';
+import Event from '../../components/event/Event';
+import ContactForm from '../../components/contact-form/ContactForm';
 import { Link } from "react-router-dom";
-import aboutData from '../../../data/aboutData.json';
+import { useSupabaseQuery } from '../../lib/hooks/useSupabaseQuery';
+import { getPublicUrl } from '../../lib/storageUtils';
 
-function Landing({ events, loading, error }) {
+// About section stats (can be moved to backend/settings table later if needed)
+const ABOUT_STATS = { members: 130, execs: 10, events: 8, partners: 8 };
+
+function Landing({ events = [], loading, error }) {
 
     const previewEvents = events?.slice(0, 3) || [];
+
+    // Fetch sponsors from Supabase for the carousel
+    const { data: sponsors } = useSupabaseQuery('sponsors');
 
     const [scrollY, setScrollY] = React.useState(0);
 
@@ -78,19 +84,19 @@ function Landing({ events, loading, error }) {
                             <div className="about-stats-card">
                                 <div className="stats-grid">
                                     <div className="stat-item">
-                                        <h4 className="stat-number">{aboutData.members}+</h4>
+                                        <h4 className="stat-number">{ABOUT_STATS.members}+</h4>
                                         <p className="stat-label">Active Members</p>
                                     </div>
                                     <div className="stat-item">
-                                        <h4 className="stat-number">{aboutData.execs}</h4>
+                                        <h4 className="stat-number">{ABOUT_STATS.execs}</h4>
                                         <p className="stat-label">Committed Executives</p>
                                     </div>
                                     <div className="stat-item">
-                                        <h4 className="stat-number">{aboutData.events}+</h4>
+                                        <h4 className="stat-number">{ABOUT_STATS.events}+</h4>
                                         <p className="stat-label">Annual Events</p>
                                     </div>
                                     <div className="stat-item">
-                                        <h4 className="stat-number">{aboutData.partners}+</h4>
+                                        <h4 className="stat-number">{ABOUT_STATS.partners}+</h4>
                                         <p className="stat-label">Dedicated Partners</p>
                                     </div>
                                 </div>
@@ -167,11 +173,11 @@ function Landing({ events, loading, error }) {
                                     </div>
                                 </div>
                                 <div className="feature-text">
-                                    <h3 className="feature-title">Strategy Enhancement</h3>
+                                    <h3 className="feature-title">Sales Agency</h3>
                                     <p className="feature-description">
-                                        Western Sales Club partners with actual organizations and businesses to offer students the opportunity
-                                        to apply sales strategies in meaningful, real-world projects. These experiences help develop your
-                                        problem-solving, communication, and strategic thinking in a professional context.
+                                        The Western Sales Club Agency partners with actual organizations and businesses to provide students with the opportunity
+                                        to apply their sales skills in meaningful, real-world projects. These experiences help develop students'
+                                        problem-solving, communication, and strategic thinking in a professional setting.
                                     </p>
                                 </div>
                             </div>
@@ -184,24 +190,26 @@ function Landing({ events, loading, error }) {
                 <div className="divider"></div>
                 <div className="sponsors-carousel">
                     <div className="marquee-track">
-
-                        {[...Array(5)].map((_, index) => (
-                            <div
-                                key={index}
-                                className="marquee-item"
-                            >
-                                <div className="marquee-logos">
-                                    {sponsorData.sponsors.map(sponsor => (
-                                        <div key={sponsor.id} className="sponsor-logo">
-                                            <img
-                                                src={new URL(`../../../data/sponsor-logos/${sponsor.logoFileName}`, import.meta.url).href}
-                                                alt={sponsor.name}
-                                            />
-                                        </div>
-                                    ))}
+                        {sponsors.length > 0 ? (
+                            [...Array(5)].map((_, index) => (
+                                <div key={index} className="marquee-item">
+                                    <div className="marquee-logos">
+                                        {sponsors.filter(Boolean).map(sponsor => (
+                                            <div key={sponsor.id} className="sponsor-logo">
+                                                <img
+                                                    src={getPublicUrl('sponsor-logos', sponsor.logo_path) || ''}
+                                                    alt={sponsor.name ?? 'Sponsor'}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
+                            ))
+                        ) : (
+                            <div className="marquee-item" style={{ textAlign: 'center', padding: '2rem', opacity: 0.5 }}>
+                                <p>Sponsors loading...</p>
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
 
@@ -226,7 +234,7 @@ function Landing({ events, loading, error }) {
                             </div>
 
                             <div className="events-list">
-                                {previewEvents.map((event) => {
+                                {previewEvents.filter(Boolean).map((event) => {
                                     return <Event key={event.id} event={event} />;
                                 })}
                             </div>

@@ -1,8 +1,8 @@
 import React from "react";
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import PageTitle from '../../components/PageTitle';
-import ContactForm from '../../components/ContactForm';
+import Nav from '../../components/nav/Nav';
+import Footer from '../../components/footer/Footer';
+import PageTitle from '../../components/page-title/PageTitle';
+import ContactForm from '../../components/contact-form/ContactForm';
 import './Contact.css';
 
 function Contact() {
