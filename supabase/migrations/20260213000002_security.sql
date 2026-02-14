@@ -1,24 +1,15 @@
 -- ================================================================
 -- 002_security.sql — is_admin(), RLS policies, GRANT/REVOKE
 -- ================================================================
--- Run AFTER 001_schema.sql. This file sets up all three security
--- layers: SQL grants, RLS policies, and the hardened is_admin()
--- function.
+-- Runs after 001_schema.sql. Sets up three layers: SQL grants,
+-- RLS policies, and is_admin().
 -- ================================================================
 
 -- ════════════════════════════════════════════════════════════════
--- LAYER 1: HARDENED is_admin() FUNCTION
+-- LAYER 1: is_admin()
 -- ════════════════════════════════════════════════════════════════
--- SECURITY DEFINER — runs with postgres (owner) privileges.
--- This is the ONLY way the admins table is ever queried.
--- Direct access is fully revoked from all API roles.
---
--- ⚠ IMPORTANT for future maintainers:
---   - Do NOT add parameters to this function.
---   - Do NOT pass user-provided input into it.
---   - Do NOT change it to SECURITY INVOKER.
---   - The STABLE marker tells Postgres the result won't change
---     within a single transaction, enabling safe caching per-request.
+-- SECURITY DEFINER; only way admins is read. No params, no user input;
+-- keep SECURITY DEFINER and search_path. STABLE for per-request caching.
 
 CREATE OR REPLACE FUNCTION public.is_admin()
 RETURNS BOOLEAN
@@ -35,8 +26,7 @@ $$;
 
 ALTER FUNCTION public.is_admin() OWNER TO postgres;
 
--- Only authenticated users can call is_admin().
--- anon has no reason to check admin status.
+-- EXECUTE restricted to authenticated; anon revoked (004 grants anon for RLS eval).
 REVOKE EXECUTE ON FUNCTION public.is_admin() FROM PUBLIC, anon;
 GRANT  EXECUTE ON FUNCTION public.is_admin() TO authenticated;
 
@@ -45,11 +35,10 @@ GRANT  EXECUTE ON FUNCTION public.is_admin() TO authenticated;
 -- LAYER 2: SQL-LEVEL GRANT / REVOKE (hard ceiling)
 -- ════════════════════════════════════════════════════════════════
 
--- admins table: completely invisible to the frontend.
+-- admins: no API access.
 REVOKE ALL ON public.admins FROM anon, authenticated;
 
--- Content tables: anon = read-only (view only; no insert/update/delete).
--- See 005_anon_readonly_content_tables.sql for the locked-down anon layer.
+-- Content tables: anon read-only here; 004 tightens anon to SELECT only.
 GRANT SELECT ON public.events         TO anon;
 GRANT SELECT ON public.sponsors       TO anon;
 GRANT SELECT ON public.executives     TO anon;
@@ -70,11 +59,9 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON public.gallery_photos TO authenticated;
 -- LAYER 3: ROW LEVEL SECURITY
 -- ════════════════════════════════════════════════════════════════
 
--- ── admins: RLS ON, ZERO policies ──────────────────────────────
+-- ── admins: RLS ON, no policies ─────────────────────────────────
 ALTER TABLE public.admins ENABLE ROW LEVEL SECURITY;
--- No policies! Combined with REVOKE ALL, this table is completely
--- inaccessible from the API. is_admin() SECURITY DEFINER is the
--- sole reader.
+-- No policies; with REVOKE ALL the table is API-inaccessible. is_admin() is the only reader.
 
 -- ── events ─────────────────────────────────────────────────────
 ALTER TABLE public.events ENABLE ROW LEVEL SECURITY;

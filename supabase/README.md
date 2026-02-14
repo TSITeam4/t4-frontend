@@ -87,21 +87,21 @@ Anonymous users see only visible rows; authenticated users see the same, and can
 - **AdminAuthProvider** implements a 3-phase flow: LOADING → AUTHORIZED or DENIED. No admin UI is shown until the app has called `is_admin()` and received a result.
 - Non-admin Google accounts are signed out when they hit the admin area, so the UI does not suggest privileges that the backend would deny anyway.
 
-These guards are defense-in-depth only; they do not replace Layers 1 and 2.
+These guards are defense-in-depth only; Layers 1 and 2 remain the enforcement.
 
 ### The `is_admin()` RPC
 
 Admin checks are centralized in a single function:
 
 - **Exposed as RPC** so the frontend can call it (e.g. from `AdminAuthProvider`). Only **authenticated** users can execute it; `anon` cannot.
-- **Returns only a boolean** — whether the **caller** is in `admins`. It does not return rows, column values, or error details. It must **never** take parameters (parameters could be abused to probe the admins table).
+- **Returns only a boolean** — whether the caller is in `admins`. No rows, column values, or error details. No parameters (parameters could be used to probe the admins table).
 - **Implemented securely:**
   - `SECURITY DEFINER` — runs with the function owner’s privileges so it can read `public.admins` even though the role has no table grants.
   - `SET search_path = public` — avoids schema injection.
   - Explicit `public.admins` and `auth.uid()` — stable, exact comparison by UUID.
   - Owned by `postgres`; `REVOKE EXECUTE FROM PUBLIC, anon`; `GRANT EXECUTE TO authenticated`.
 
-Restricting who can call `is_admin()` (e.g. only admins) would break the flow: non-admins need to call it to learn they are not admin and be signed out. So the design is “any authenticated user can call it; they only learn a boolean about themselves.”
+Restricting who can call `is_admin()` (e.g. only admins) would break the flow: non-admins call it to learn they are not admin and get signed out. Design: “any authenticated user can call it; they only learn a boolean about themselves.”
 
 ### Storage
 
@@ -109,14 +109,14 @@ Restricting who can call `is_admin()` (e.g. only admins) would break the flow: n
 - **Write (INSERT/UPDATE/DELETE)** on `storage.objects` is gated by policies that require `bucket_id = '<name>'` and `public.is_admin()`.
 - Object names in the DB are opaque (e.g. UUID-based). Avoid storing original filenames or user identifiers in object paths. Deleted files may linger in CDN caches briefly; that is accepted for this use case.
 
-### Rules that must not be broken
+### Rules (do not break)
 
-- **Never** put the service role key in frontend code or in env files that the frontend bundle can see.
-- **Never** disable RLS on any table.
-- **Never** grant INSERT/UPDATE/DELETE to `anon` on content tables.
-- **Never** change `is_admin()` to accept parameters or to return anything other than a boolean for the current user; do not relax `SECURITY DEFINER` or `search_path` without a security review.
-- **Never** store admin status in localStorage or cookies.
-- **Never** add a new table without enabling RLS and following the “Adding a new table” steps below.
+- Service role key stays out of frontend code and frontend-visible env.
+- RLS stays enabled on all tables.
+- No INSERT/UPDATE/DELETE for `anon` on content tables.
+- `is_admin()`: no parameters, boolean only; keep SECURITY DEFINER and search_path unless reviewed.
+- Admin status is not stored in localStorage or cookies.
+- New tables: enable RLS and follow the "Adding a new table" steps below.
 
 ### Adding a new table
 
@@ -127,18 +127,18 @@ Restricting who can call `is_admin()` (e.g. only admins) would break the flow: n
 5. `GRANT SELECT` to `anon`; `GRANT SELECT, INSERT, UPDATE, DELETE` to `authenticated`.
 6. `REVOKE INSERT, UPDATE, DELETE` (and REFERENCES, TRIGGER, TRUNCATE if needed) from `anon`.
 7. If the table has a `*_path` column for storage, add it to `supabase/scripts/cleanup-orphans.sql`.
-8. Run `supabase/scripts/verify-security.sql` and fix any failing checks.
+8. Run `supabase/scripts/verify-security.sql`; all checks must pass.
 9. Update the verify script’s table lists (CHECK 1, 3, 7) to include the new table.
 
 ### Admin management
 
 Admins are identified by **user_id** (UUID from `auth.users`), not email. Email in `admins` is for display only.
 
-**To add or replace an admin:**
+**Adding or replacing an admin:**
 
-1. Have the person sign in once with Google (so their `auth.users` row exists).
-2. In Supabase Dashboard → Authentication → Users, copy their UUID.
-3. In the SQL Editor (service role):
+1. Person signs in once with Google (so `auth.users` row exists).
+2. Dashboard → Authentication → Users: copy their UUID.
+3. SQL Editor (service role):
 
 ```sql
 -- Remove old admin (if applicable)
@@ -153,9 +153,9 @@ See `supabase/scripts/seed-admin.sql` for a documented process.
 
 ### Verification and maintenance
 
-- **After any schema or policy change:** run `supabase/scripts/verify-security.sql`. All checks must pass.
-- **Orphaned storage:** run `supabase/scripts/cleanup-orphans.sql` in dry-run mode first; then review before running deletes.
-- **Periodically:** confirm RLS is still enabled on all tables, that `.env` is not in git, and that Realtime is disabled if you do not use it.
+- **After schema or policy changes:** run `supabase/scripts/verify-security.sql`; all checks must pass.
+- **Orphaned storage:** run `supabase/scripts/cleanup-orphans.sql` in dry-run first; review before deletes.
+- **Periodically:** confirm RLS enabled on all tables, `.env` not in git, Realtime off if unused.
 
 ### Operational notes
 

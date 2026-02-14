@@ -1,9 +1,8 @@
 -- ================================================================
 -- 001_schema.sql — Table definitions for WSC Content Management
 -- ================================================================
--- Run this migration first in the Supabase SQL Editor (service role).
--- Creates: admins, events, sponsors, executives, gallery_photos
--- All visibility columns default to FALSE (safe-by-default).
+-- Creates: admins, events, sponsors, executives, gallery_photos.
+-- Visibility columns default FALSE (safe-by-default).
 -- ================================================================
 
 -- ────────────────────────────────────────────────────────────────

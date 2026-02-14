@@ -1,14 +1,12 @@
 -- ================================================================
 -- 003_storage_policies.sql — Storage bucket creation + policies
 -- ================================================================
--- Run AFTER 002_security.sql (requires is_admin() to exist).
---
--- Creates 4 public buckets with admin-only write policies.
--- Public buckets allow unauthenticated reads via CDN URLs.
+-- Runs after 002 (is_admin() must exist). Four public buckets,
+-- admin-only write; public read via CDN.
 -- ================================================================
 
 -- ────────────────────────────────────────────────────────────────
--- CREATE BUCKETS (idempotent — INSERT … ON CONFLICT DO NOTHING)
+-- CREATE BUCKETS (idempotent: ON CONFLICT DO NOTHING)
 -- ────────────────────────────────────────────────────────────────
 INSERT INTO storage.buckets (id, name, public) VALUES ('headshots',     'headshots',     true) ON CONFLICT (id) DO NOTHING;
 INSERT INTO storage.buckets (id, name, public) VALUES ('sponsor-logos', 'sponsor-logos', true) ON CONFLICT (id) DO NOTHING;
@@ -17,16 +15,12 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('gallery',       'gallery
 
 
 -- ================================================================
--- STORAGE POLICIES
--- 4 buckets × 4 policies = 16 policies total.
--- IMPORTANT: After creating these, verify each bucket_id literal
--- matches the section header. A mismatch silently breaks access.
+-- STORAGE POLICIES (4 buckets × 4 policies). bucket_id in each
+-- policy must match the section; mismatch breaks access.
 -- ================================================================
 
 -- ┌──────────────────────────────────────────────────────────────┐
--- │ BUCKET: headshots                                           │
--- │ Purpose: Executive headshot images                          │
--- │ ☐ Verify: all 4 policies below use bucket_id = 'headshots'  │
+-- │ BUCKET: headshots (executive headshots)                      │
 -- └──────────────────────────────────────────────────────────────┘
 CREATE POLICY "headshots: public read"
   ON storage.objects FOR SELECT
@@ -45,9 +39,7 @@ CREATE POLICY "headshots: admin delete"
   USING (bucket_id = 'headshots' AND public.is_admin());
 
 -- ┌──────────────────────────────────────────────────────────────┐
--- │ BUCKET: sponsor-logos                                       │
--- │ Purpose: Sponsor logo images                                │
--- │ ☐ Verify: all 4 policies below use bucket_id = 'sponsor-logos' │
+-- │ BUCKET: sponsor-logos                                        │
 -- └──────────────────────────────────────────────────────────────┘
 CREATE POLICY "sponsor-logos: public read"
   ON storage.objects FOR SELECT
@@ -66,9 +58,7 @@ CREATE POLICY "sponsor-logos: admin delete"
   USING (bucket_id = 'sponsor-logos' AND public.is_admin());
 
 -- ┌──────────────────────────────────────────────────────────────┐
--- │ BUCKET: event-images                                        │
--- │ Purpose: Event banner/promo images                          │
--- │ ☐ Verify: all 4 policies below use bucket_id = 'event-images' │
+-- │ BUCKET: event-images (banner/promo)                          │
 -- └──────────────────────────────────────────────────────────────┘
 CREATE POLICY "event-images: public read"
   ON storage.objects FOR SELECT
@@ -87,9 +77,7 @@ CREATE POLICY "event-images: admin delete"
   USING (bucket_id = 'event-images' AND public.is_admin());
 
 -- ┌──────────────────────────────────────────────────────────────┐
--- │ BUCKET: gallery                                             │
--- │ Purpose: About page gallery photos                          │
--- │ ☐ Verify: all 4 policies below use bucket_id = 'gallery'    │
+-- │ BUCKET: gallery (about page)                                │
 -- └──────────────────────────────────────────────────────────────┘
 CREATE POLICY "gallery: public read"
   ON storage.objects FOR SELECT
