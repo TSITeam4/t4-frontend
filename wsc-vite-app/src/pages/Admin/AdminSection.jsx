@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabaseClient';
 import { useSupabaseQuery } from '../../lib/hooks/useSupabaseQuery';
 import { useSupabaseMutation, deleteContentItem } from '../../lib/hooks/useSupabaseMutation';
 import { uploadFile, getPublicUrl, deleteFile } from '../../lib/storageUtils';
+import { validateImageDimensions } from '../../lib/imageUtils';
 import { LIMITS } from '../../lib/constants';
 import AsyncStateWrapper from '../../components/shared/AsyncStateWrapper';
 import AdminForm from './AdminForm';
@@ -55,12 +56,15 @@ function AdminSection({ configKey, config }) {
 
           // Upload new file if provided
           if (file) {
-            // Validate file
-            if (file.size > LIMITS.MAX_IMAGE_SIZE_MB * 1024 * 1024) {
-              throw new Error(`File must be under ${LIMITS.MAX_IMAGE_SIZE_MB} MB.`);
-            }
             if (!LIMITS.ALLOWED_IMAGE_TYPES.includes(file.type)) {
-              throw new Error('Invalid file type. Use JPEG, PNG, WebP, or AVIF.');
+              throw new Error('Invalid file type. Please use a JPEG, PNG, WebP, or AVIF image.');
+            }
+            // Headshots: 3000×3000. Logos: 2500×2500. Gallery: 1920×1080.
+            const maxW = configKey === 'executives' ? LIMITS.MAX_HEADSHOT_DIMENSION : configKey === 'sponsors' ? LIMITS.MAX_LOGO_DIMENSION : LIMITS.MAX_IMAGE_WIDTH;
+            const maxH = configKey === 'executives' ? LIMITS.MAX_HEADSHOT_DIMENSION : configKey === 'sponsors' ? LIMITS.MAX_LOGO_DIMENSION : LIMITS.MAX_IMAGE_HEIGHT;
+            await validateImageDimensions(file, maxW, maxH);
+            if (file.size > LIMITS.MAX_IMAGE_SIZE_MB * 1024 * 1024) {
+              throw new Error(`The image file is too large. Maximum size is ${LIMITS.MAX_IMAGE_SIZE_MB} MB. Please use a smaller image or compress it before uploading.`);
             }
 
             const { objectName } = await uploadFile(bucket, file);
@@ -188,13 +192,6 @@ function AdminSection({ configKey, config }) {
           + Add {displayName.replace(/s$/, '')}
         </button>
       </div>
-
-      {/* Mutation error */}
-      {mutError && (
-        <p className="admin-error-msg" style={{ marginBottom: '1rem' }}>
-          {mutError.message}
-        </p>
-      )}
 
       {/* Table */}
       <AsyncStateWrapper

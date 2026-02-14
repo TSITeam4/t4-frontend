@@ -72,10 +72,12 @@ export function classifyError(error) {
     };
   }
 
-  // Fallback
+  // Fallback: preserve user-facing messages (e.g. validation errors we threw)
+  const originalMsg = error.message?.trim() ?? '';
+  const isShortUserMessage = originalMsg.length > 0 && originalMsg.length < 300 && !originalMsg.includes('\n');
   return {
     category: 'unknown',
-    message: 'Something went wrong. Please try again.',
-    retryable: true,
+    message: isShortUserMessage ? originalMsg : 'Something went wrong. Please try again.',
+    retryable: !isShortUserMessage,
   };
 }

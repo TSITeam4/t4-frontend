@@ -3,8 +3,14 @@
  * Prevents unbounded growth and keeps the project within free tier quotas.
  */
 export const LIMITS = {
-  // Per-file upload limits
+  // Per-file upload limits (images must be within these dimensions; no resizing)
   MAX_IMAGE_SIZE_MB: 2,
+  MAX_IMAGE_WIDTH: 1920,
+  MAX_IMAGE_HEIGHT: 1080,
+  /** Headshots can be larger square images (e.g. 2500×2500). */
+  MAX_HEADSHOT_DIMENSION: 3000,
+  /** Sponsor logos: max 2500×2500. */
+  MAX_LOGO_DIMENSION: 2500,
   ALLOWED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
 
   // Per-table row limits (prevents unbounded growth)

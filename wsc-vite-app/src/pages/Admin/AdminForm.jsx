@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { getPublicUrl } from '../../lib/storageUtils';
 
 /**
  * AdminForm — generic form component driven by field config.
@@ -17,7 +16,6 @@ function AdminForm({ fields, initialData, pathColumn, bucket, onSave, onCancel, 
   });
 
   const [file, setFile] = useState(null);
-  const [filePreview, setFilePreview] = useState(null);
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (name, value) => {
@@ -27,8 +25,15 @@ function AdminForm({ fields, initialData, pathColumn, bucket, onSave, onCancel, 
   const processFile = (selected) => {
     if (selected && selected.type.startsWith('image/')) {
       setFile(selected);
-      setFilePreview(URL.createObjectURL(selected));
     }
+  };
+
+  const clearFile = (e, inputId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setFile(null);
+    const input = document.getElementById(inputId);
+    if (input) input.value = '';
   };
 
   const handleFileChange = (e) => {
@@ -55,11 +60,6 @@ function AdminForm({ fields, initialData, pathColumn, bucket, onSave, onCancel, 
     onSave(formData, file);
   };
 
-  // Existing image URL for preview
-  const existingImageUrl = initialData?.[pathColumn]
-    ? getPublicUrl(bucket, initialData[pathColumn])
-    : null;
-
   return (
     <form onSubmit={handleSubmit}>
       {fields.map((field) => {
@@ -73,7 +73,7 @@ function AdminForm({ fields, initialData, pathColumn, bucket, onSave, onCancel, 
                 onDragLeave={handleDrag}
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
-                onClick={() => document.getElementById(`file-input-${field.name}`)?.click()}
+                onClick={() => !file && document.getElementById(`file-input-${field.name}`)?.click()}
               >
                 <input
                   id={`file-input-${field.name}`}
@@ -82,19 +82,22 @@ function AdminForm({ fields, initialData, pathColumn, bucket, onSave, onCancel, 
                   onChange={handleFileChange}
                   className="admin-file-input-hidden"
                 />
-                <span className="admin-dropzone-text">
-                  {filePreview || existingImageUrl
-                    ? 'Drop a new image or click to browse'
-                    : 'Drag and drop an image here, or click to browse'}
-                </span>
+                {file ? (
+                  <span className="admin-dropzone-text admin-dropzone-filename">
+                    <span>{file.name}</span>
+                    <button
+                      type="button"
+                      className="admin-dropzone-clear"
+                      onClick={(e) => clearFile(e, `file-input-${field.name}`)}
+                      aria-label="Remove selected image"
+                    />
+                  </span>
+                ) : (
+                  <span className="admin-dropzone-text">
+                    Drop a new image or click to browse
+                  </span>
+                )}
               </div>
-              {(filePreview || existingImageUrl) && (
-                <img
-                  src={filePreview || existingImageUrl}
-                  alt="Preview"
-                  className="admin-image-preview"
-                />
-              )}
             </div>
           );
         }
