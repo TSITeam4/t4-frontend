@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Backgrounds ── */
+  --color-bg-base:     #0A0A0A;
+  --color-bg-elevated: #0F0F0F;
+  --color-bg-subtle:   #141414;
+  --color-bg-overlay:  #1A1A1A;
+
+  /* ── Brand ── */
+  --color-gold:        #D4A843;
+  --color-gold-muted:  #8A6D2A;
+  --color-gold-dim:    rgba(212, 168, 67, 0.15);
+  --color-purple:      #4F2683;
+  --color-purple-dim:  rgba(79, 38, 131, 0.12);
+
+  /* ── Text ── */
+  --color-text-primary:   #FFFFFF;
+  --color-text-secondary: #F0EDEA;
+  --color-text-muted:     #888888;
+  --color-text-subtle:    #555555;
+
+  /* ── Borders ── */
+  --color-border:       rgba(255, 255, 255, 0.08);
+  --color-border-gold:  rgba(212, 168, 67, 0.25);
+  --color-border-hover: rgba(212, 168, 67, 0.60);
+
+  /* ── Type Scale: Display (Cormorant Garamond) ── */
+  --text-hero:        clamp(3.5rem, 9vw, 8.5rem);
+  --text-display:     clamp(2.5rem, 5.5vw, 5rem);
+  --text-display-sm:  clamp(1.75rem, 3.5vw, 3rem);
+
+  /* ── Type Scale: UI / Body (DM Sans) ── */
+  --text-heading:     clamp(1.25rem, 2.5vw, 1.75rem);
+  --text-body-lg:     1.125rem;
+  --text-body:        1rem;
+  --text-small:       0.875rem;
+
+  /* ── Type Scale: Mono (DM Mono) ── */
+  --text-mono-sm:     0.75rem;
+  --text-mono:        0.875rem;
+  --text-mono-lg:     1rem;
+
+  /* ── Font Families ── */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+
+  /* ── Spacing ── */
+  --space-1:  0.5rem;
+  --space-2:  1rem;
+  --space-3:  1.5rem;
+  --space-4:  2rem;
+  --space-6:  3rem;
+  --space-8:  4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-20: 10rem;
+  --space-24: 12rem;
+}
+
+/* ── Base Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-bg-base);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}
+
+/* ── Global Focus Styles (§10 Accessibility) ── */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── Reduced Motion (§5) ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-subtle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold) var(--color-bg-subtle);
+}
+
+/* ── Skip Navigation Link ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Hero Scroll Indicator Bounce ── */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(8px); }
+}
+
+.animate-scroll-bounce {
+  animation: scroll-bounce 1.5s ease-in-out infinite;
+}
+
+/* ── Partners Marquee ── */
+.marquee-wrapper {
+  overflow: hidden;
+  /* Prevent any horizontal scroll bleed from the w-max track */
+  contain: content;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ── Bento Gallery Grid ── */
+.bento-grid {
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: clamp(10rem, 20vw, 16rem);
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-rows: clamp(8rem, 30vw, 12rem) !important;
+  }
+  .bento-cell {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+}
+
+/* ── Footer Social Icons ── */
+.social-icon {
+  filter: brightness(0) invert(0.53);
+  transition: filter 0.25s ease;
+}
+
+.social-icon-link:hover .social-icon,
+.social-icon-link:active .social-icon {
+  filter: brightness(0) saturate(100%) invert(73%) sepia(30%) saturate(1000%) hue-rotate(10deg) brightness(90%);
+}
+
+.sr-only:focus-visible {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 10000;
+  width: auto;
+  height: auto;
+  padding: var(--space-1) var(--space-3);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--color-bg-base);
+  color: var(--color-gold);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--color-border-gold);
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}

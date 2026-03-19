@@ -1,0 +1,71 @@
+/* Executive Team Page Styles */
+@import '../../index.css';
+
+/* ========== Team Section ========== */
+.team-page-container {
+  width: 100%;
+  max-width: 72rem;
+  padding: 0 1rem;
+  margin: 0 auto 4rem;
+}
+
+.team-section-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.team-section-divider {
+  border-top: 2px solid var(--wsc-gold);
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+/* ========== Team Grids ========== */
+.team-grid-presidents {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5rem 0;
+  max-width: 48rem;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .team-grid-presidents {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.team-grid-vps,
+.team-grid-avps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5rem 2rem;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .team-grid-vps,
+  .team-grid-avps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .team-grid-vps {
+    gap: 5rem 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .team-grid-vps,
+  .team-grid-avps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5rem 2rem;
+  }
+}

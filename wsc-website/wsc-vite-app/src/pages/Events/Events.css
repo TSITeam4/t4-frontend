@@ -1,0 +1,76 @@
+/* Events Page Styles */
+@import '../../index.css';
+
+/* ========== Hero Section ========== */
+.events-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 80vh;
+  align-items: center;
+}
+
+.events-hero-background {
+  position: absolute;
+  inset: 0;
+  background-image: url(/TORONTO.avif);
+  background-size: cover;
+  background-position: top;
+  opacity: 0.3;
+}
+
+.events-hero-content {
+  position: relative;
+  z-index: 10;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 3rem;
+}
+
+.events-hero-title {
+  font-size: 2.25rem;
+  color: white;
+  font-weight: bold;
+}
+
+@media (min-width: 640px) {
+  .events-hero-title {
+    font-size: 3rem;
+  }
+}
+
+.events-hero-description {
+  color: white;
+  font-size: 1rem;
+  margin-top: 1rem;
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+}
+
+@media (min-width: 640px) {
+  .events-hero-description {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .events-hero-description {
+    font-size: 1.125rem;
+  }
+}
+
+/* ========== Events List Section ========== */
+.events-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 3rem 5rem;
+  gap: 2rem;
+  align-items: center;
+}

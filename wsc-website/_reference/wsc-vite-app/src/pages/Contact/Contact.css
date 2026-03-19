@@ -1,0 +1,7 @@
+/* Contact Page Styles */
+@import '../../index.css';
+
+/* Only the spacer remains - all other styles moved to ContactForm.css */
+.contact-page-spacer {
+  padding-bottom: 5rem;
+}
